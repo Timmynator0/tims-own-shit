@@ -41,8 +41,8 @@ float x=0.0f, y= 6.0f, z=5.0f ;
 //when no key is being presses
 float deltaAngle = 0.0f;
 float deltaMove = 0;
-int xOrigin = -1;
-
+int xOrigin = -1, yOrigin = -1;
+bool warped = true;
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -76,8 +76,10 @@ void computePos(float deltaMove) {
 
 void renderScene(void) {
 
-	if (deltaMove)
+		if (deltaMove)
 		computePos(deltaMove);
+        glutSwapBuffers();
+	
 
 		if(!isTextureLoaded)
 	{
@@ -93,6 +95,8 @@ void renderScene(void) {
 
 	}	
 
+
+	
 
 	// Clear Color and Depth Buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -121,8 +125,7 @@ void renderScene(void) {
 		glBindTexture(GL_TEXTURE_2D,textures[blocks[0].type]);
 		blocks[0].draw();//
 	//}
-
-        glutSwapBuffers();
+	
 } 
 
 void processNormalKeys(unsigned char key, int xx, int yy) { 
@@ -153,17 +156,38 @@ void releaseKey(int key, int x, int y) {
 } 
 
 void mouseMove(int x, int y) { 	
-	int tempx = 0;
-         // this will only be true when the left button is down
-         if (xOrigin >= 0) {
+	//int tempx = 0;
+      
+	// this will only be true when the left button is down
 	
+	if (xOrigin >= 0) {
+	
+	 if(!warped)
+    {
 		// update deltaAngle
-		deltaAngle = (tempx - xOrigin) * 0.001f;
+	//	deltaAngle = (x - xOrigin) * 0.001f;
 
 		// update camera's direction
-		lx = sin(angle + deltaAngle);
-		lz = -cos(angle + deltaAngle);
+	//	lx = sin(angle + deltaAngle);
+	//	lz = -cos(angle + deltaAngle);
+		
+		lx=( float)(x - glutGet(GLUT_WINDOW_WIDTH)/2); 
+
+
+		//glutWarpPointer(deltaAngle,yOrigin);
+		warped=true;
+		glutWarpPointer(glutGet(GLUT_WINDOW_X)+glutGet(GLUT_WINDOW_WIDTH)/2, glutGet(GLUT_WINDOW_Y)+glutGet(GLUT_WINDOW_HEIGHT)/2);
+		//SetCursorPos(xOrigin,yOrigin);
 	}
+	else
+	{
+			warped = false ;
+			
+	}	
+	 glutPostRedisplay();
+ }
+	 
+		 
 }
 
 void mouseButton(int button, int state, int x, int y) {
@@ -178,6 +202,7 @@ void mouseButton(int button, int state, int x, int y) {
 		}
 		else  {// state = GLUT_DOWN
 			xOrigin = x;
+			yOrigin = y;
 		}
 	}
 }
@@ -215,7 +240,7 @@ int main(int argc, char **argv) {
 	glEnable(GL_COLOR_MATERIAL);
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);
-	glutSetCursor(GLUT_CURSOR_NONE); 
+	//glutSetCursor(GLUT_CURSOR_NONE); 
 	// enter GLUT event processing cycle
 	glutMainLoop();
 
