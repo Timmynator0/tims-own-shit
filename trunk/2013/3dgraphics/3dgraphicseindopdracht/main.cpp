@@ -77,7 +77,7 @@ void cube (void) {
 	glPopMatrix();
 	}
 }
-
+// draw the checkered floor
 void floor(void)
 {
 	
@@ -87,7 +87,7 @@ void floor(void)
 	unsigned int SizeY = 8;
 
 	glPushMatrix();
-	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
+	glTranslated(-10 * 10,-1, -10 * 10);
 	glRotatef(90,1.0,0.0,0.0);
 	glBegin(GL_QUADS);
 	for (unsigned int x =0;x<GridSizeX;++x)
