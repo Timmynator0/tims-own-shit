@@ -43,7 +43,7 @@ float deltaAngle = 0.0f;
 float deltaMove = 0;
 int xOrigin = -1, yOrigin = -1;
 bool warped = true;
-
+float xrottemp =0,yrottemp = 0;
 //angle of rotation
 float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle=0.0;
 
@@ -54,6 +54,10 @@ float lastx, lasty;
 //positions of the cubes
 float positionz[10];
 float positionx[10];
+
+
+
+
 
 void cubepositions (void) { //set the positions of the cubes
 	for (int i=0;i<10;i++)
@@ -74,8 +78,40 @@ void cube (void) {
 	}
 }
 
+void floor(void)
+{
+	
+	unsigned int GridSizeX = 16;
+	unsigned int GridSizeY = 16;
+	unsigned int SizeX = 8;
+	unsigned int SizeY = 8;
+
+	glPushMatrix();
+	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
+	glRotatef(90,1.0,0.0,0.0);
+	glBegin(GL_QUADS);
+	for (unsigned int x =0;x<GridSizeX;++x)
+		for (unsigned int y =0;y<GridSizeY;++y)
+		{
+			if ((x+y)& 0x00000001) //modulo 2
+				glColor3f(1.0f,1.0f,1.0f); //white
+			else
+				glColor3f(0.0f,0.0f,0.0f); //black
+ 
+			glVertex2f(    x*SizeX,    y*SizeY);
+			glVertex2f((x+1)*SizeX,    y*SizeY);
+			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
+			glVertex2f(    x*SizeX,(y+1)*SizeY);
+ 
+		}
+	glEnd();
+	glPopMatrix();
+}
+
 void init (void) {
 	cubepositions();
+
+
 }
 
 void enable (void) {
@@ -94,15 +130,20 @@ void display (void) {
 	glLoadIdentity(); 
 	
 	glTranslatef(0.0f, 0.0f, -cRadius);
-	glRotatef(xrot,1.0,0.0,0.0);
+	glRotated(xrot,1.0,0.0,0.0);
 	glColor3f(1.0f, 0.0f, 0.0f);
 	glutSolidCube(2); //Our character to follow
 	
-	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
-	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
-	glColor3f(1.0f, 1.0f, 1.0f);
-	cube(); //call the cube drawing function
 
+	//std::cout << yrot << std::endl;
+	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
+	
+	
+	
+	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
+	glColor3f(0.0f, 0.0f, 1.0f);
+	cube(); //call the cube drawing function
+	floor(); //draw the floor
 	glutSwapBuffers(); //swap the buffers
 	angle++; //increase the angle
 }
@@ -111,21 +152,35 @@ void reshape (int w, int h) {
 	glViewport (0, 0, (GLsizei)w, (GLsizei)h); //set the viewport to the current window specifications
 	glMatrixMode (GL_PROJECTION); //set the matrix to projection
 	glLoadIdentity ();
-	gluPerspective (60, (GLfloat)w / (GLfloat)h, 0.1, 100.0); //set the perspective (angle of sight, width, height, , depth)
+	gluPerspective (60, (GLfloat)w / (GLfloat)h, 0.1, 1000.0); //set the perspective (angle of sight, width, height, , depth)
 	glMatrixMode (GL_MODELVIEW); //set the matrix back to model
 }
 
 void keyboard (unsigned char key, int x, int y) {
 	if (key=='q')
 	{
-	xrot += 1;
-	if (xrot >360) xrot -= 360;
+		if(xrot <= 90)
+		{
+			xrot += 1;
+		}
+		if (xrot >360) 
+		{
+			xrot -= 360;
+		}
+	
+		
 	}
 
 	if (key=='z')
 	{
-	xrot -= 1;
-	if (xrot < -360) xrot += 360;
+		if(xrot >= 0)
+		{
+			xrot -= 1;
+		}
+		if (xrot < -360) 
+		{
+			xrot += 360;
+		}
 	}
 
 	if (key=='w')
@@ -168,6 +223,11 @@ void keyboard (unsigned char key, int x, int y) {
 	{
 	exit(0);
 	}
+	if (key==' ')
+	{
+
+		//std::cout << "space has been pressed" << std::endl;
+	}
 }
 
 void mouseMovement(int x, int y) {
@@ -175,9 +235,44 @@ void mouseMovement(int x, int y) {
 	int diffy=y-lasty; //check the difference between the current y and the last y position
 	lastx=x; //set lastx to the current x position
 	lasty=y; //set lasty to the current y position
+	//std::cout << "diffy = "<<x<< std::endl;
+	//std::cout << "diffx = "<<y<< std::endl;
+
+
+
+
 	xrot += (float) diffy; //set the xrot to xrot with the addition of the difference in the y position
-	std::cout << "x rotation "<<xrot<< std::endl;
-	yrot += (float) diffx;	//set the xrot to yrot with the addition of the difference in the x position
+	//std::cout << "x rotation "<<xrot<< std::endl;
+	yrot += (float) diffx;	//set the yrot to yrot with the addition of the difference in the x position
+
+	//check for unuseable angles
+	if(xrot < 0)
+	{
+		xrot = 0;
+		
+	}
+	if(xrot > 90)
+	{
+		xrot = 90;
+		
+	}
+	
+	// meh, backup?
+		/*if(xrot >= 0 && xrot <= 90)
+		{
+			glRotatef(xrot,1.0,0.0,0.0);
+		}
+	if(xrot < 0)
+	{
+		xrot = 0;
+		glRotated(xrot,1.0,0.0,0.0);
+	}
+	if(xrot > 90)
+	{
+		xrot = 90;
+		glRotated(xrot,1.0,0.0,0.0);
+	}*/
+
 }
 
 int main (int argc, char **argv) {

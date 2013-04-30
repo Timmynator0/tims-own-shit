@@ -1,0 +1,17 @@
+﻿Build started 25-6-2012 14:32:14.
+     1>Project "D:\cave\Development\Applications\ModelViewer\ModelViewer.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\ModelViewer.unsuccessfulbuild".
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ID:\cave\Development\Libraries\vrjuggler/include /I"D:\cave\Development\Libraries\vrjuggler-deps/include" /ID:\cave\\Development\Libraries\CaveLib /ID:\cave\\Development\Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D CPPDOM_DYN_LINK /D BOOST_ALL_DYN_LINK /D _CRT_SECURE_NO_WARNINGS /D CPPDOM_DYN_LINK /D BOOST_ALL_DYN_LINK /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /wd4251 /wd4275 /wd4244 /wd4305 /wd4290 /wd4251 /wd4275 /wd4244 /wd4305 /wd4290 /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\cave\development\applications\modelviewer\main.cpp(12): error C2259: 'ModelViewer' : cannot instantiate abstract class
+                 due to following members:
+                 'void vrj::opengl::App::draw(void)' : is abstract
+                 d:\cave\development\libraries\vrjuggler\include\vrj\draw\opengl\app.h(94) : see declaration of 'vrj::opengl::App::draw'
+     1>d:\cave\development\applications\modelviewer\main.cpp(12): error C2661: 'ModelViewer::ModelViewer' : no overloaded function takes 3 arguments
+     1>Done Building Project "D:\cave\Development\Applications\ModelViewer\ModelViewer.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:09.62
