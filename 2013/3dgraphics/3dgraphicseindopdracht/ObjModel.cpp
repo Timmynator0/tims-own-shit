@@ -144,7 +144,7 @@ ObjModel::ObjModel(std::string fileName)
 				}
 			}
 			if(currentGroup->materialIndex == -1)
-				//std::cout<<"Could not find material name "<<params[1]<<std::endl;
+				std::cout<<"Could not find material name "<<params[1]<<std::endl;
 				;
 		}
 	}
@@ -176,9 +176,6 @@ Texture::~Texture(void)
 Texture::Texture()
 {
 }
-
-
-
 void ObjModel::draw()
 {
 	for(size_t i = 0; i < groups.size(); i++)
@@ -198,6 +195,7 @@ void ObjModel::draw()
 		glEnd();
 	}
 }
+
 
 void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
 {
@@ -256,6 +254,10 @@ void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
 ObjModel::MaterialInfo::MaterialInfo()
 {
 	hasTexture = false;
+}
+std::vector<Vec3f>*	ObjModel::getVertices()
+{
+	return &vertices;
 }
 
 

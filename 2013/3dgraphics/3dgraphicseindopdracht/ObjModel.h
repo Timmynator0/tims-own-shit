@@ -5,7 +5,16 @@
 #include <list>
 
 #include <windows.h>
+#include <GLTools.h>   
 #include <gl/GL.h>
+#include <GLMatrixStack.h>
+
+#ifdef __APPLE__
+#include <glut/glut.h>          // OS X version of GLUT
+#else
+#define FREEGLUT
+#include <GL/freeglut.h>            // Windows FreeGlut equivalent
+#endif
 
 using namespace std;
 #define TEXTURE_COUNT 20
@@ -100,6 +109,8 @@ private:
 
 	void loadMaterialFile(std::string fileName, std::string dirName);
 public:
+	
+	std::vector<Vec3f>*	getVertices();
 	ObjModel(std::string filename);
 	~ObjModel(void);
 	std::string name;
