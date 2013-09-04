@@ -18,14 +18,15 @@
 #include "loadTGA.h"
 #include "ObjModel.h"
 #include "block.h"
-#define TEXTURE_COUNT 1
+#define TEXTURE_COUNT 2
 
-GLuint textures[TEXTURE_COUNT];
-const char *TextureFiles[TEXTURE_COUNT] = {"rock1.tga"};
+//GLuint textures[TEXTURE_COUNT];
+//const char *TextureFiles[TEXTURE_COUNT] = {"rock1.tga"};
 	//"wood.tga","sand.tga","glass.tga","tree.tga","leaves.tga"};
 
 int screenwidth= 1024, screenheight = 700;
 bool isTextureLoaded = 0;
+vector<ObjModel*> models;
 
 vector<block> blocks;
 // angle of rotation for the camera direction
@@ -55,7 +56,7 @@ float lastx, lasty;
 float positionz[10];
 float positionx[10];
 
-
+//vector<Vec3f> *vertices;
 
 
 
@@ -85,7 +86,7 @@ void floor(void)
 	unsigned int GridSizeY = 16;
 	unsigned int SizeX = 8;
 	unsigned int SizeY = 8;
-
+	
 	glPushMatrix();
 	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
 	glRotatef(90,1.0,0.0,0.0);
@@ -107,42 +108,62 @@ void floor(void)
 	glEnd();
 	glPopMatrix();
 }
+
+void loadModels()
+{
+	models.push_back(new ObjModel("models/world4export.obj"));
+}
 void init (void) {
 	cubepositions();
+	loadModels();
 
 
 }
 
 void enable (void) {
-	glEnable (GL_DEPTH_TEST); //enable the depth testing
-	glEnable (GL_LIGHTING); //enable the lighting
-	glEnable (GL_LIGHT0); //enable LIGHT0, our Diffuse Light
-	glEnable (GL_COLOR_MATERIAL);
+
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
+	glEnable(GL_COLOR_MATERIAL);
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
 }
 
 void display (void) {
 	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
-	enable();
+	
     
 	glLoadIdentity(); 
 	
 	glTranslatef(0.0f, 0.0f, -cRadius);
 	glRotated(xrot,1.0,0.0,0.0);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glutSolidCube(2); //Our character to follow
+	//glColor3f(1.0f, 0.0f, 0.0f);
+	glutSolidCube(3); //Our character to follow
 	
-
+	 
 	//std::cout << yrot << std::endl;
 	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
 	
 	
 	
 	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
-	glColor3f(0.0f, 0.0f, 1.0f);
-	cube(); //call the cube drawing function
-	floor(); //draw the floor
+//	glColor3f(0.0f, 0.0f, 1.0f);
+//	cube(); //call the cube drawing function
+//	floor(); //draw the floor
+
+// the world
+	glPushMatrix();
+	glTranslated(-positionx[1] * 10,-10, -positionz[1] * 10);
+	
+	models[0]->draw();
+		
+	glPopMatrix();
+
+
 	glutSwapBuffers(); //swap the buffers
 	angle++; //increase the angle
 }
@@ -274,12 +295,14 @@ void mouseMovement(int x, int y) {
 
 }
 
-int main (int argc, char **argv) {
+int main (int argc, char **argv) 
+{
     glutInit (&argc, argv);
 	glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH); 
 	glutInitWindowSize (500, 500); 
 	glutInitWindowPosition (100, 100);
     glutCreateWindow ("A basic OpenGL Window"); 
+	enable();
 	init (); 
     glutDisplayFunc (display); 
 	glutIdleFunc (display); 
@@ -287,7 +310,7 @@ int main (int argc, char **argv) {
 
 	glutPassiveMotionFunc(mouseMovement); //check for mouse movement
 
-	glutKeyboardFunc (keyboard); 
-    glutMainLoop (); 
+	glutKeyboardFunc(keyboard); 
+    glutMainLoop(); 
     return 0;
 }
