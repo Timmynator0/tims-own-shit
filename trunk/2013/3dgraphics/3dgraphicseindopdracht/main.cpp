@@ -29,8 +29,6 @@ bool isTextureLoaded = 0;
 vector<ObjModel*> models;
 
 vector<block> blocks;
-// angle of rotation for the camera direction
-//float angle = 0.0f;
 
 // actual vector representing the camera's direction
 float lx=0.0f,lz=-1.0f;
@@ -45,7 +43,7 @@ float deltaMove = 0;
 int xOrigin = -1, yOrigin = -1;
 bool warped = true;
 float xrottemp =0,yrottemp = 0;
-//angle of rotation
+//angle of rotation + positions
 float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle=0.0;
 
 float cRadius = 10.0f; // our radius distance from our character
@@ -112,12 +110,15 @@ void floor(void)
 void loadModels()
 {
 	models.push_back(new ObjModel("models/world4export.obj"));
+	models.push_back(new ObjModel("models/steve.obj"));
 }
+
 void init (void) {
+	xpos = -31;
+	zpos = -31;
+	yrot = 140;
 	cubepositions();
 	loadModels();
-
-
 }
 
 void enable (void) {
@@ -132,6 +133,33 @@ void enable (void) {
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
 }
 
+void drawWorld()
+{
+	glPushMatrix();
+	//glTranslated(-positionx[1] * 10,-8.5, -positionz[1] * 10);
+	glTranslated(0 ,-8.5, 0);
+	models[0]->draw();
+	glPopMatrix();
+}
+
+void drawPlayer()
+{
+	glTranslatef(0.0f, 0.0f, -cRadius);
+	glRotated(xrot,1.0,0.0,0.0);
+	
+	
+	models[1]->draw();
+
+
+	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
+	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
+	std::cout << xpos << ",," << zpos << std::endl;
+	//glColor3f(1.0f, 0.0f, 0.0f);
+	
+	//glutSolidCube(3); //Our character to follow
+	
+}
+
 void display (void) {
 	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
@@ -139,29 +167,10 @@ void display (void) {
     
 	glLoadIdentity(); 
 	
-	glTranslatef(0.0f, 0.0f, -cRadius);
-	glRotated(xrot,1.0,0.0,0.0);
-	//glColor3f(1.0f, 0.0f, 0.0f);
-	glutSolidCube(3); //Our character to follow
+	drawPlayer(); //draw the player in front of the camera
 	
-	 
-	//std::cout << yrot << std::endl;
-	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
+	drawWorld(); 	// the world
 	
-	
-	
-	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
-//	glColor3f(0.0f, 0.0f, 1.0f);
-//	cube(); //call the cube drawing function
-//	floor(); //draw the floor
-
-// the world
-	glPushMatrix();
-	glTranslated(-positionx[1] * 10,-10, -positionz[1] * 10);
-	
-	models[0]->draw();
-		
-	glPopMatrix();
 
 
 	glutSwapBuffers(); //swap the buffers
