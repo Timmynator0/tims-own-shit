@@ -38,13 +38,13 @@ float x=0.0f, y= 6.0f, z=5.0f ;
 
 // the key states. These variables will be zero
 //when no key is being presses
-float deltaAngle = 0.0f;
-float deltaMove = 0;
+//float deltaAngle = 0.0f;
+//float deltaMove = 0;
 //int xOrigin = -1, yOrigin = -1;
 //bool warped = true;
 //float xrottemp =0,yrottemp = 0;
 //angle of rotation + positions
-float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle=0.0;
+float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0;
 
 float cRadius = 10.0f; // our radius distance from our character
 
@@ -58,8 +58,7 @@ float positionx[10];
 
 
 //jumping params
-//float xpos=0; // x position
-float MaxJump=1.5; // max height of jump
+float MaxJump=1.7; // max height of jump
 float Gravity=1.05; // manipulates max jump
 float SubMaxJump= MaxJump; //constant that restores MaxJump
 float y2=0; // Y position
@@ -68,6 +67,7 @@ bool Jumping=false; //Jumping flag
 bool Falling=false; //Falling flag
 bool JumpOK=true; //Is it okay to jump?
 bool spacerelease = true;
+bool wPressed , sPressed = false;
 
 void cubepositions (void) { //set the positions of the cubes
 	for (int i=0;i<10;i++)
@@ -151,6 +151,25 @@ void handleJump()
 
 if(Jumping)
 {
+	if(wPressed)
+	{
+		float xrotrad, yrotrad;
+		yrotrad = (yrot / 180 * 3.141592654f);
+		xrotrad = (xrot / 180 * 3.141592654f); 
+		xpos += float(sin(yrotrad));
+		zpos -= float(cos(yrotrad));
+		ypos -= float(sin(xrotrad));
+	}
+	if(sPressed)
+	{
+			float xrotrad, yrotrad;
+	yrotrad = (yrot / 180 * 3.141592654f);
+	xrotrad = (xrot / 180 * 3.141592654f); 
+	xpos -= float(sin(yrotrad));
+	zpos += float(cos(yrotrad));
+	ypos += float(sin(xrotrad));
+	}
+
     MaxJump /= Gravity;
     ypos += MaxJump;
 }
@@ -165,6 +184,25 @@ if(MaxJump <= 1)
 /*Opposite of Jumping*/
 if(Falling)
 {
+	if(wPressed)
+	{
+		float xrotrad, yrotrad;
+		yrotrad = (yrot / 180 * 3.141592654f);
+		xrotrad = (xrot / 180 * 3.141592654f); 
+		xpos += float(sin(yrotrad));
+		zpos -= float(cos(yrotrad));
+		ypos -= float(sin(xrotrad));
+	}
+	if (sPressed)
+	{
+		float xrotrad, yrotrad;
+		yrotrad = (yrot / 180 * 3.141592654f);
+		xrotrad = (xrot / 180 * 3.141592654f); 
+		xpos -= float(sin(yrotrad));
+		zpos += float(cos(yrotrad));
+		ypos += float(sin(xrotrad));
+	}
+
     MaxJump *= Gravity;
     ypos -= MaxJump;
 }
@@ -175,7 +213,7 @@ if(Falling && MaxJump > 4)
 	MaxJump = 4;
 }
 /*If the block is back to it's y origin, make both jumping and falling false, and assign MaxJump to constant SubMaxJump to restore it back to normal. It's not okay to jump again unless you release the UP key, and then press it again.*/
-	if(ypos <= yOrigin)
+	if(ypos <= yOrigin )
 	{
 		Jumping=false;
 		Falling=false;
@@ -185,7 +223,10 @@ if(Falling && MaxJump > 4)
 			JumpOK=true;
 		}
 		ypos = yOrigin;
-
+	}
+	if(!Jumping && !Falling && ypos >= yOrigin)
+	{
+		ypos = yOrigin;
 	}
 }
 
@@ -240,7 +281,7 @@ void display (void) {
 
 
 	glutSwapBuffers(); //swap the buffers
-	angle++; //increase the angle
+	//angle++; //increase the angle
 }
 
 void reshape (int w, int h) {
@@ -280,22 +321,32 @@ void keyboard (unsigned char key, int x, int y) {
 
 	if (key=='w')
 	{
-	float xrotrad, yrotrad;
-	yrotrad = (yrot / 180 * 3.141592654f);
-	xrotrad = (xrot / 180 * 3.141592654f); 
-	xpos += float(sin(yrotrad));
-	zpos -= float(cos(yrotrad));
-	ypos -= float(sin(xrotrad));
+		wPressed = true;
+		if(!Jumping)
+	{
+		float xrotrad, yrotrad;
+		yrotrad = (yrot / 180 * 3.141592654f);
+		xrotrad = (xrot / 180 * 3.141592654f); 
+		xpos += float(sin(yrotrad));
+		zpos -= float(cos(yrotrad));
+		ypos -= float(sin(xrotrad));
+	}
+		
 	}
 
 	if (key=='s')
 	{
+
+		sPressed = true;
+		if(!Jumping)
+		{
 	float xrotrad, yrotrad;
 	yrotrad = (yrot / 180 * 3.141592654f);
 	xrotrad = (xrot / 180 * 3.141592654f); 
 	xpos -= float(sin(yrotrad));
 	zpos += float(cos(yrotrad));
 	ypos += float(sin(xrotrad));
+		}
 	}
 
 	if (key=='d')
@@ -321,6 +372,7 @@ void keyboard (unsigned char key, int x, int y) {
 
 	if (key ==' ')
 	{
+		
 		spacerelease = false;
 		Jumping = true; // you are now jumping, you can't jump again until jump is done!
 		JumpOK=false; 
@@ -338,6 +390,16 @@ void keyboardUp(unsigned char key, int x, int y)
 		spacerelease = true;
 		//std::cout << "space has been pressed" << std::endl;
 	}
+	if ( key == 'w')
+	{
+		wPressed = false;
+	}
+	if(key = 's')
+	{
+		sPressed = false;
+	}
+
+
 }
 
 void mouseMovement(int x, int y) {
@@ -366,23 +428,6 @@ void mouseMovement(int x, int y) {
 		xrot = 90;
 		
 	}
-	
-	// meh, backup?
-		/*if(xrot >= 0 && xrot <= 90)
-		{
-			glRotatef(xrot,1.0,0.0,0.0);
-		}
-	if(xrot < 0)
-	{
-		xrot = 0;
-		glRotated(xrot,1.0,0.0,0.0);
-	}
-	if(xrot > 90)
-	{
-		xrot = 90;
-		glRotated(xrot,1.0,0.0,0.0);
-	}*/
-
 }
 
 int main (int argc, char **argv) 
