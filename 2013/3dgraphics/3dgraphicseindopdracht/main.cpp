@@ -40,9 +40,9 @@ float x=0.0f, y= 6.0f, z=5.0f ;
 //when no key is being presses
 float deltaAngle = 0.0f;
 float deltaMove = 0;
-int xOrigin = -1, yOrigin = -1;
-bool warped = true;
-float xrottemp =0,yrottemp = 0;
+//int xOrigin = -1, yOrigin = -1;
+//bool warped = true;
+//float xrottemp =0,yrottemp = 0;
 //angle of rotation + positions
 float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0, angle=0.0;
 
@@ -57,6 +57,17 @@ float positionx[10];
 //vector<Vec3f> *vertices;
 
 
+//jumping params
+//float xpos=0; // x position
+float MaxJump=1.5; // max height of jump
+float Gravity=1.05; // manipulates max jump
+float SubMaxJump= MaxJump; //constant that restores MaxJump
+float y2=0; // Y position
+float yOrigin = y2; // Constant that restores y back to it's origin
+bool Jumping=false; //Jumping flag
+bool Falling=false; //Falling flag
+bool JumpOK=true; //Is it okay to jump?
+bool spacerelease = true;
 
 void cubepositions (void) { //set the positions of the cubes
 	for (int i=0;i<10;i++)
@@ -133,10 +144,56 @@ void enable (void) {
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
 }
 
+void handleJump()
+{
+
+/*If yo're jumping, divide MaxJump by Gravity so it will slowly get smaller, and add MaxJump to y so the character moves up*/
+
+if(Jumping)
+{
+    MaxJump /= Gravity;
+    ypos += MaxJump;
+}
+ 
+/*If MaxJump has run out, our character is no longer jumping, but falling*/
+if(MaxJump <= 1)
+{
+    Falling=true;
+    Jumping=false;
+}
+ 
+/*Opposite of Jumping*/
+if(Falling)
+{
+    MaxJump *= Gravity;
+    ypos -= MaxJump;
+}
+ 
+/*Keeps MaxJump from getting higher than 4, so the character doesn't fall at large intervals.*/
+if(Falling && MaxJump > 4)
+{
+	MaxJump = 4;
+}
+/*If the block is back to it's y origin, make both jumping and falling false, and assign MaxJump to constant SubMaxJump to restore it back to normal. It's not okay to jump again unless you release the UP key, and then press it again.*/
+	if(ypos <= yOrigin)
+	{
+		Jumping=false;
+		Falling=false;
+		MaxJump=SubMaxJump;
+		if (spacerelease)
+		{
+			JumpOK=true;
+		}
+		ypos = yOrigin;
+
+	}
+}
+
+
+
 void drawWorld()
 {
 	glPushMatrix();
-	//glTranslated(-positionx[1] * 10,-8.5, -positionz[1] * 10);
 	glTranslated(0 ,-8.5, 0);
 	models[0]->draw();
 	glPopMatrix();
@@ -145,15 +202,24 @@ void drawWorld()
 void drawPlayer()
 {
 	glTranslatef(0.0f, 0.0f, -cRadius);
-	glRotated(xrot,1.0,0.0,0.0);
-	
-	
+	glRotated(xrot,1.0, 0.0 ,0.0);
+
 	models[1]->draw();
 
 
 	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
-	glTranslated(-xpos,0.0f,-zpos); //translate the screen to the position of our camera
-	std::cout << xpos << ",," << zpos << std::endl;
+	glTranslated(-xpos,-ypos,-zpos); //translate the screen to the position of our camera
+		std::cout << -ypos << std::endl;
+	
+	
+	//glPushMatrix();
+//	if(Jumping)
+//	{
+//	glTranslated(0, ypos+MaxJump,0);
+	//}
+
+	//glPopMatrix();
+
 	//glColor3f(1.0f, 0.0f, 0.0f);
 	
 	//glutSolidCube(3); //Our character to follow
@@ -166,7 +232,7 @@ void display (void) {
 	
     
 	glLoadIdentity(); 
-	
+	handleJump();
 	drawPlayer(); //draw the player in front of the camera
 	
 	drawWorld(); 	// the world
@@ -248,13 +314,28 @@ void keyboard (unsigned char key, int x, int y) {
 	zpos -= float(sin(yrotrad)) * 0.2;
 	}
 
-	if (key==27)
+	if (key==27)// esc key :3
 	{
 	exit(0);
 	}
-	if (key==' ')
-	{
 
+	if (key ==' ')
+	{
+		spacerelease = false;
+		Jumping = true; // you are now jumping, you can't jump again until jump is done!
+		JumpOK=false; 
+		std::cout << "space has been pressed" << std::endl;
+	}
+}
+
+void keyboardUp(unsigned char key, int x, int y)
+
+{
+	if (key ==' ')
+	{
+		//Jumping = true; // you are now jumping, you can't jump again until jump is done!
+		//JumpOK=true;
+		spacerelease = true;
 		//std::cout << "space has been pressed" << std::endl;
 	}
 }
@@ -315,6 +396,7 @@ int main (int argc, char **argv)
 	init (); 
     glutDisplayFunc (display); 
 	glutIdleFunc (display); 
+	 glutKeyboardUpFunc(keyboardUp);
 	glutReshapeFunc (reshape); 
 
 	glutPassiveMotionFunc(mouseMovement); //check for mouse movement
