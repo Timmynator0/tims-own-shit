@@ -69,54 +69,54 @@ bool JumpOK=true; //Is it okay to jump?
 bool spacerelease = true;
 bool wPressed , sPressed = false;
 
-void cubepositions (void) { //set the positions of the cubes
-	for (int i=0;i<10;i++)
-	{
-	positionz[i] = rand()%5 + 1;
-	positionx[i] = rand()%5 + 1;
-	}
-}
+//void cubepositions (void) { //set the positions of the cubes
+//	for (int i=0;i<10;i++)
+//	{
+//	positionz[i] = rand()%5 + 1;
+//	positionx[i] = rand()%5 + 1;
+//	}
+//}
 
 //draw the cube
-void cube (void) {
-	for (int i=0;i<10 - 1;i++)
-	{
-	glPushMatrix();
-	glTranslated(-positionx[i + 1] * 10, 0, -positionz[i + 1] * 10); //translate the cube
-	glutSolidCube(2); //draw the cube
-	glPopMatrix();
-	}
-}
-
-void floor(void)
-{
-	
-	unsigned int GridSizeX = 16;
-	unsigned int GridSizeY = 16;
-	unsigned int SizeX = 8;
-	unsigned int SizeY = 8;
-	
-	glPushMatrix();
-	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
-	glRotatef(90,1.0,0.0,0.0);
-	glBegin(GL_QUADS);
-	for (unsigned int x =0;x<GridSizeX;++x)
-		for (unsigned int y =0;y<GridSizeY;++y)
-		{
-			if ((x+y)& 0x00000001) //modulo 2
-				glColor3f(1.0f,1.0f,1.0f); //white
-			else
-				glColor3f(0.0f,0.0f,0.0f); //black
- 
-			glVertex2f(    x*SizeX,    y*SizeY);
-			glVertex2f((x+1)*SizeX,    y*SizeY);
-			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
-			glVertex2f(    x*SizeX,(y+1)*SizeY);
- 
-		}
-	glEnd();
-	glPopMatrix();
-}
+//void cube (void) {
+//	for (int i=0;i<10 - 1;i++)
+//	{
+//	glPushMatrix();
+//	glTranslated(-positionx[i + 1] * 10, 0, -positionz[i + 1] * 10); //translate the cube
+//	glutSolidCube(2); //draw the cube
+//	glPopMatrix();
+//	}
+//}
+//
+//void floor(void)
+//{
+//	
+//	unsigned int GridSizeX = 16;
+//	unsigned int GridSizeY = 16;
+//	unsigned int SizeX = 8;
+//	unsigned int SizeY = 8;
+//	
+//	glPushMatrix();
+//	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
+//	glRotatef(90,1.0,0.0,0.0);
+//	glBegin(GL_QUADS);
+//	for (unsigned int x =0;x<GridSizeX;++x)
+//		for (unsigned int y =0;y<GridSizeY;++y)
+//		{
+//			if ((x+y)& 0x00000001) //modulo 2
+//				glColor3f(1.0f,1.0f,1.0f); //white
+//			else
+//				glColor3f(0.0f,0.0f,0.0f); //black
+// 
+//			glVertex2f(    x*SizeX,    y*SizeY);
+//			glVertex2f((x+1)*SizeX,    y*SizeY);
+//			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
+//			glVertex2f(    x*SizeX,(y+1)*SizeY);
+// 
+//		}
+//	glEnd();
+//	glPopMatrix();
+//}
 
 void loadModels()
 {
@@ -128,7 +128,7 @@ void init (void) {
 	xpos = -31;
 	zpos = -31;
 	yrot = 140;
-	cubepositions();
+	//cubepositions();
 	loadModels();
 }
 
@@ -136,18 +136,21 @@ void enable (void) {
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
-	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_AUTO_NORMAL);
+	//glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
+
+	//glEnable(GL_COLOR_MATERIAL);
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
 }
 
 void handleJump()
 {
 
-/*If yo're jumping, divide MaxJump by Gravity so it will slowly get smaller, and add MaxJump to y so the character moves up*/
+/*If you're jumping, divide MaxJump by Gravity so it will slowly get smaller, and add MaxJump to y so the character moves up*/
 
 if(Jumping)
 {
@@ -253,20 +256,21 @@ void drawPlayer()
 		std::cout << -ypos << std::endl;
 	
 	
-	//glPushMatrix();
-//	if(Jumping)
-//	{
-//	glTranslated(0, ypos+MaxJump,0);
-	//}
-
-	//glPopMatrix();
-
-	//glColor3f(1.0f, 0.0f, 0.0f);
 	
-	//glutSolidCube(3); //Our character to follow
 	
 }
 
+
+
+void drawSun()
+{
+	 GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat pos[] = { 0.0, 0.0, 1.0, 0 };
+glEnable(GL_LIGHTING);  
+glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+glLightf(GL_LIGHT1, GL_POSITION, pos);
+
+}
 void display (void) {
 	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
@@ -274,9 +278,9 @@ void display (void) {
     
 	glLoadIdentity(); 
 	handleJump();
-	drawPlayer(); //draw the player in front of the camera
-	
+	drawPlayer(); //draw the player in front of the camera	
 	drawWorld(); 	// the world
+	drawSun();
 	
 
 
@@ -441,11 +445,9 @@ int main (int argc, char **argv)
 	init (); 
     glutDisplayFunc (display); 
 	glutIdleFunc (display); 
-	 glutKeyboardUpFunc(keyboardUp);
+	glutKeyboardUpFunc(keyboardUp);
 	glutReshapeFunc (reshape); 
-
 	glutPassiveMotionFunc(mouseMovement); //check for mouse movement
-
 	glutKeyboardFunc(keyboard); 
     glutMainLoop(); 
     return 0;
