@@ -69,58 +69,62 @@ bool JumpOK=true; //Is it okay to jump?
 bool spacerelease = true;
 bool wPressed , sPressed = false;
 
-//void cubepositions (void) { //set the positions of the cubes
-//	for (int i=0;i<10;i++)
-//	{
-//	positionz[i] = rand()%5 + 1;
-//	positionx[i] = rand()%5 + 1;
-//	}
-//}
+
+
+
+void cubepositions (void) { //set the positions of the cubes
+	for (int i=0;i<10;i++)
+	{
+	positionz[i] = rand()%5 + 1;
+	positionx[i] = rand()%5 + 1;
+	}
+}
 
 //draw the cube
-//void cube (void) {
-//	for (int i=0;i<10 - 1;i++)
-//	{
-//	glPushMatrix();
-//	glTranslated(-positionx[i + 1] * 10, 0, -positionz[i + 1] * 10); //translate the cube
-//	glutSolidCube(2); //draw the cube
-//	glPopMatrix();
-//	}
-//}
-//
-//void floor(void)
-//{
-//	
-//	unsigned int GridSizeX = 16;
-//	unsigned int GridSizeY = 16;
-//	unsigned int SizeX = 8;
-//	unsigned int SizeY = 8;
-//	
-//	glPushMatrix();
-//	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
-//	glRotatef(90,1.0,0.0,0.0);
-//	glBegin(GL_QUADS);
-//	for (unsigned int x =0;x<GridSizeX;++x)
-//		for (unsigned int y =0;y<GridSizeY;++y)
-//		{
-//			if ((x+y)& 0x00000001) //modulo 2
-//				glColor3f(1.0f,1.0f,1.0f); //white
-//			else
-//				glColor3f(0.0f,0.0f,0.0f); //black
-// 
-//			glVertex2f(    x*SizeX,    y*SizeY);
-//			glVertex2f((x+1)*SizeX,    y*SizeY);
-//			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
-//			glVertex2f(    x*SizeX,(y+1)*SizeY);
-// 
-//		}
-//	glEnd();
-//	glPopMatrix();
-//}
+void cube(void) {
+	for (int i=0;i<10 - 1;i++)
+	{
+	glPushMatrix();
+	glTranslated(-positionx[i + 1] * 10, 0, -positionz[i + 1] * 10); //translate the cube
+	glutSolidCube(2); //draw the cube
+	glPopMatrix();
+	}
+}
+
+void floor(void)
+{
+	
+	unsigned int GridSizeX = 16;
+	unsigned int GridSizeY = 16;
+	unsigned int SizeX = 8;
+	unsigned int SizeY = 8;
+	
+	glPushMatrix();
+	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
+	glRotatef(90,1.0,0.0,0.0);
+	glBegin(GL_QUADS);
+	for (unsigned int x =0;x<GridSizeX;++x)
+		for (unsigned int y =0;y<GridSizeY;++y)
+		{
+			if ((x+y)& 0x00000001) //modulo 2
+				glColor3f(1.0f,1.0f,1.0f); //white
+			else
+				glColor3f(0.0f,0.0f,0.0f); //black
+ 
+			glVertex2f(    x*SizeX,    y*SizeY);
+			glVertex2f((x+1)*SizeX,    y*SizeY);
+			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
+			glVertex2f(    x*SizeX,(y+1)*SizeY);
+ 
+		}
+	glEnd();
+	glPopMatrix();
+}
 
 void loadModels()
 {
-	models.push_back(new ObjModel("models/world4export.obj"));
+	//models.push_back(new ObjModel("models/world4export.obj"));
+	models.push_back(new ObjModel("models/world3.obj"));
 	models.push_back(new ObjModel("models/steve.obj"));
 }
 
@@ -128,7 +132,7 @@ void init (void) {
 	xpos = -31;
 	zpos = -31;
 	yrot = 140;
-	//cubepositions();
+	cubepositions();
 	loadModels();
 }
 
@@ -141,9 +145,11 @@ void enable (void) {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_AUTO_NORMAL);
-	//glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
 
 	//glEnable(GL_COLOR_MATERIAL);
+	//glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
+	//glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
 }
 
@@ -238,7 +244,7 @@ if(Falling && MaxJump > 4)
 void drawWorld()
 {
 	glPushMatrix();
-	glTranslated(0 ,-8.5, 0);
+	glTranslated(0 ,-17, 0);
 	models[0]->draw();
 	glPopMatrix();
 }
@@ -253,7 +259,7 @@ void drawPlayer()
 
 	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
 	glTranslated(-xpos,-ypos,-zpos); //translate the screen to the position of our camera
-		std::cout << -ypos << std::endl;
+		//std::cout << -xpos << '+' << -ypos << '+' << -zpos <<std::endl;
 	
 	
 	
@@ -261,31 +267,70 @@ void drawPlayer()
 }
 
 
-
+float planetorb  = 1;
 void drawSun()
 {
-	 GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-GLfloat pos[] = { 0.0, 0.0, 1.0, 0 };
-glEnable(GL_LIGHTING);  
-glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-glLightf(GL_LIGHT1, GL_POSITION, pos);
+	glPushMatrix();
+	//glTranslatef(0, 20 , -0);
 
+	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet around the sun     
+    glTranslatef(55,0.0,0.0);        // sets the radius of the orbit 
+	GLfloat light_diffuse[] = { 255, 244 , 150, 1 }; // = { 255, 244 , 196, 1 }; 
+	GLfloat pos[] = { 0, 20 , -0, 1 };
+	//glEnable(GL_LIGHTING);  
+	glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightf(GL_LIGHT1, GL_POSITION, *pos);
+
+	
+	
+
+
+	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+ //  float diffuse[]  = {0.8f, 0.8f, 0.8f, 1.0f};
+ //  float specular[] = {0.3f, 0.1f, 0.1f, 1.0f};
+	//   glEnable(GL_LIGHTING);
+
+ //
+ //     glEnable( GL_LIGHT1);
+ //     glLightfv(GL_LIGHT1, GL_DIFFUSE,  diffuse);
+ //     glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
+ //  
+	//  
+	//glClearColor (0.0,0.0,0.0,1.0);
+ //  float shininess = 5.0f;
+ // glEnable(GL_COLOR_MATERIAL);
+ // glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+ // glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  specular);
+ // glColor3ub(120,120,30);
+	////glColor3ub(120,120,30);           // yellow 
+ //   glutWireSphere(5,20,20);        // sun 
+	//planetorb ++;
+	//glClearColor (0.0,0.0,0.0,1.0);
+ //
+  glPopMatrix();
 }
-void display (void) {
+
+void display (void) 
+{
 	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
 	
     
 	glLoadIdentity(); 
+
 	handleJump();
-	drawPlayer(); //draw the player in front of the camera	
+	drawPlayer();	 //draw the player in front of the camera	
 	drawWorld(); 	// the world
+
+
 	drawSun();
 	
 
 
 	glutSwapBuffers(); //swap the buffers
-	//angle++; //increase the angle
+	
+
 }
 
 void reshape (int w, int h) {
