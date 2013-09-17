@@ -18,7 +18,10 @@
 #include "loadTGA.h"
 #include "ObjModel.h"
 #include "block.h"
-#define TEXTURE_COUNT 2
+#include <math.h>       /* atan */
+
+#define PI 3.14159265
+#define TEXTURE_COUNT 12
 
 //GLuint textures[TEXTURE_COUNT];
 //const char *TextureFiles[TEXTURE_COUNT] = {"rock1.tga"};
@@ -44,7 +47,7 @@ float x=0.0f, y= 6.0f, z=5.0f ;
 //bool warped = true;
 //float xrottemp =0,yrottemp = 0;
 //angle of rotation + positions
-float xpos = 0, ypos = 0, zpos = 0, xrot = 0, yrot = 0;
+float xpos = 0, ypos = 0, zpos = 0, xrot = 8, yrot = 0;
 
 float cRadius = 10.0f; // our radius distance from our character
 
@@ -67,7 +70,7 @@ bool Jumping=false; //Jumping flag
 bool Falling=false; //Falling flag
 bool JumpOK=true; //Is it okay to jump?
 bool spacerelease = true;
-bool wPressed , sPressed = false;
+bool wPressed , sPressed, qPressed, zPressed = false;
 
 
 
@@ -126,6 +129,8 @@ void loadModels()
 	//models.push_back(new ObjModel("models/world4export.obj"));
 	models.push_back(new ObjModel("models/world3.obj"));
 	models.push_back(new ObjModel("models/steve.obj"));
+	models.push_back(new ObjModel("models/sun.obj"));
+	models.push_back(new ObjModel("models/kip.obj"));
 }
 
 void init (void) {
@@ -145,6 +150,12 @@ void enable (void) {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_AUTO_NORMAL);
+	//LIGHTINGGG
+	GLfloat light_diffuse[] = { 255, 244 , 150, 1 }; // = { 255, 244 , 196, 1 }; 
+	GLfloat pos[] = { 0, 20 , -0, 1 };
+
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+	glLightf(GL_LIGHT1, GL_POSITION, *pos);
 
 	//glEnable(GL_COLOR_MATERIAL);
 	//glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
@@ -244,7 +255,7 @@ if(Falling && MaxJump > 4)
 void drawWorld()
 {
 	glPushMatrix();
-	glTranslated(0 ,-17, 0);
+	glTranslatef(0 ,-16.4, 0);
 	models[0]->draw();
 	glPopMatrix();
 }
@@ -259,11 +270,7 @@ void drawPlayer()
 
 	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
 	glTranslated(-xpos,-ypos,-zpos); //translate the screen to the position of our camera
-		//std::cout << -xpos << '+' << -ypos << '+' << -zpos <<std::endl;
-	
-	
-	
-	
+
 }
 
 
@@ -271,59 +278,83 @@ float planetorb  = 1;
 void drawSun()
 {
 	glPushMatrix();
-	//glTranslatef(0, 20 , -0);
-
+	
+	glTranslatef(0, 20 , -0);
 	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet around the sun     
-    glTranslatef(55,0.0,0.0);        // sets the radius of the orbit 
-	GLfloat light_diffuse[] = { 255, 244 , 150, 1 }; // = { 255, 244 , 196, 1 }; 
-	GLfloat pos[] = { 0, 20 , -0, 1 };
-	//glEnable(GL_LIGHTING);  
-	glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-	glLightf(GL_LIGHT1, GL_POSITION, *pos);
-
+    glTranslatef(110,0.0,0.0);        // sets the radius of the orbit 
+	models[2]->draw();
 	
-	
+	if(qPressed)
+	{
+		planetorb ++;
+		planetorb ++;
+	}
+	else if(zPressed)
+	{
+		planetorb --;
+		planetorb --;
+	}
 
-
-	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
- //  float diffuse[]  = {0.8f, 0.8f, 0.8f, 1.0f};
- //  float specular[] = {0.3f, 0.1f, 0.1f, 1.0f};
-	//   glEnable(GL_LIGHTING);
-
- //
- //     glEnable( GL_LIGHT1);
- //     glLightfv(GL_LIGHT1, GL_DIFFUSE,  diffuse);
- //     glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
- //  
-	//  
-	//glClearColor (0.0,0.0,0.0,1.0);
- //  float shininess = 5.0f;
- // glEnable(GL_COLOR_MATERIAL);
- // glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, shininess);
- // glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,  specular);
- // glColor3ub(120,120,30);
-	////glColor3ub(120,120,30);           // yellow 
- //   glutWireSphere(5,20,20);        // sun 
-	//planetorb ++;
-	//glClearColor (0.0,0.0,0.0,1.0);
- //
   glPopMatrix();
 }
 
+float chickenX = 0.0f, chickenY = -23.1f, chickenZ = 0.0f;
+double diffY= 0, diffX = 0;
+void drawChicken() // just a cube
+{
+
+	glPushMatrix();
+	
+	//checks if chicken is in range, if not, move him towards the player
+
+	//move chicken to the left
+	if(xpos + 5 < chickenX )
+	{
+		chickenX -= 0.5f;
+	}
+	//move chicken to the right
+	else if(xpos -5  > chickenX )
+	{
+		chickenX += 0.5f;
+	}
+	//move chicken down
+	if(zpos +5 < chickenZ)
+	{
+		chickenZ -= 0.5f;
+	}
+	//move chicken up
+	else if(zpos -5 > chickenZ )
+	{
+		chickenZ += 0.5f;
+	}
+
+	float angle = atan2(chickenZ - zpos, chickenX - xpos);
+
+//Of course the return type is in radians, if you need it in degrees just do angle * 180 / PI
+	glTranslatef(chickenX, chickenY, chickenZ);
+	glRotatef( 180 ,0.0,1,0.0);
+	glRotatef( angle* 180 / PI ,0.0,1,0.0); 
+	
+	//glutSolidCube(2); //draw the cube
+		models[3]->draw(); // draw the chicken!
+
+	glPopMatrix();
+
+}
 void display (void) 
 {
-	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
 	
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clear the color buffer and the depth buffer
+	glClearColor (0.0,0.0,0.0,1.0); //clear the screen to black
     
 	glLoadIdentity(); 
+	
 
 	handleJump();
+
 	drawPlayer();	 //draw the player in front of the camera	
 	drawWorld(); 	// the world
-
-
+	drawChicken();
 	drawSun();
 	
 
@@ -344,28 +375,12 @@ void reshape (int w, int h) {
 void keyboard (unsigned char key, int x, int y) {
 	if (key=='q')
 	{
-		if(xrot <= 90)
-		{
-			xrot += 1;
-		}
-		if (xrot >360) 
-		{
-			xrot -= 360;
-		}
-	
-		
+		qPressed = true; 
 	}
 
 	if (key=='z')
 	{
-		if(xrot >= 0)
-		{
-			xrot -= 1;
-		}
-		if (xrot < -360) 
-		{
-			xrot += 360;
-		}
+		zPressed = true;
 	}
 
 	if (key=='w')
@@ -432,6 +447,14 @@ void keyboard (unsigned char key, int x, int y) {
 void keyboardUp(unsigned char key, int x, int y)
 
 {
+	if (key =='q')
+	{
+		qPressed = false;
+	}
+	if (key =='z')
+	{
+		zPressed = false;
+	}
 	if (key ==' ')
 	{
 		//Jumping = true; // you are now jumping, you can't jump again until jump is done!
@@ -467,9 +490,9 @@ void mouseMovement(int x, int y) {
 	yrot += (float) diffx;	//set the yrot to yrot with the addition of the difference in the x position
 
 	//check for unuseable angles
-	if(xrot < 0)
+	if(xrot < 1)
 	{
-		xrot = 0;
+		xrot = 1;
 		
 	}
 	if(xrot > 90)
@@ -477,19 +500,25 @@ void mouseMovement(int x, int y) {
 		xrot = 90;
 		
 	}
+	//cout << xrot << std::endl;
 }
 
+void idle()
+{
+	Sleep(1);
+	glutPostRedisplay();
+}
 int main (int argc, char **argv) 
 {
     glutInit (&argc, argv);
-	glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH); 
+	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 	glutInitWindowSize (500, 500); 
 	glutInitWindowPosition (100, 100);
     glutCreateWindow ("A basic OpenGL Window"); 
 	enable();
 	init (); 
     glutDisplayFunc (display); 
-	glutIdleFunc (display); 
+	glutIdleFunc (idle); 
 	glutKeyboardUpFunc(keyboardUp);
 	glutReshapeFunc (reshape); 
 	glutPassiveMotionFunc(mouseMovement); //check for mouse movement

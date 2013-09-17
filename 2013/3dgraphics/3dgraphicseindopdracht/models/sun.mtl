@@ -1,0 +1,38 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 11.09.2013 12:59:27
+
+newmtl Sun_Surface
+	Ns 35.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 0.5220 0.5220 0.5220
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Map__9_Falloff.tga
+	map_Kd Map__9_Falloff.tga
+	map_Ks Map__65_Falloff.tga
+	map_Ke Map__67_Falloff.tga
+	map_bump -bm 0.3500 Map__68_Falloff.tga
+
+newmtl Sun_Clouds
+	Ns 15.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5882 0.5882 0.5882
+	Kd 0.5882 0.5882 0.5882
+	Ks 1.4400 1.4400 1.4400
+	Ke 0.0000 0.0000 0.0000
+	map_Ka Clouds.tga
+	map_Kd Clouds.tga
+	map_Ks Clouds.tga
+	map_Ke Clouds.tga
+	map_d Clouds-mask.tga
+	map_bump Clouds.tga
+	bump Clouds.tga
