@@ -336,8 +336,8 @@ void drawChicken() // just a cube
 	glRotatef( angle* 180 / PI ,0.0,1,0.0); 
 	
 	//glutSolidCube(2); //draw the cube
-		models[3]->draw(); // draw the chicken!
-
+		models[3]->draw(); // draw the chicken!!
+		
 	glPopMatrix();
 
 }
