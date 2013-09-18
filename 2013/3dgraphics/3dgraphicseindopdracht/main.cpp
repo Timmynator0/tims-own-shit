@@ -126,6 +126,7 @@ void loadModels()
 	models.push_back(new ObjModel("models/steve.obj"));
 	models.push_back(new ObjModel("models/sun.obj"));
 	models.push_back(new ObjModel("models/kip.obj"));
+	models.push_back(new ObjModel("models/sphere.obj"));
 }
 
 void init (void) {
@@ -140,20 +141,20 @@ void enable (void) {
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT1);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_AUTO_NORMAL);
+	//glEnable(GL_AUTO_NORMAL);
 	//LIGHTINGGG
-	GLfloat light_diffuse[] = { 255, 244 , 150, 1 }; // = { 255, 244 , 196, 1 }; 
-	GLfloat pos[] = { 0, 20 , -0, 1 };
+	//GLfloat light_diffuse[] = { 255, 244 , 150, 0 }; // = { 255, 244 , 196, 1 }; 
+	//GLfloat pos[] = { 0, 20 , -0, 1 };
 
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-	glLightf(GL_LIGHT1, GL_POSITION, *pos);
+	//glLightfv(GL_LIGHT1, GL_AMBIENT_AND_DIFFUSE, light_diffuse);
+	//glLightf(GL_LIGHT1, GL_POSITION, *pos);
 
-	//glEnable(GL_COLOR_MATERIAL);
-	//glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
 	//glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
@@ -262,7 +263,7 @@ void drawPlayer()
 
 	models[1]->draw();
 
-
+	std::cout << xrot << std::endl;
 	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
 	glTranslated(-xpos,-ypos,-zpos); //translate the screen to the position of our camera
 
@@ -275,7 +276,7 @@ void drawSun()
 	glPushMatrix();
 	
 	glTranslatef(0, 20 , -0);
-	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet around the sun     
+	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet.
     glTranslatef(110,0.0,0.0);        // sets the radius of the orbit 
 	models[2]->draw();
 	
@@ -332,6 +333,17 @@ void drawChicken() // just a cube
 	glPopMatrix();
 
 }
+void drawEnv()
+{
+	glPushMatrix();
+	glTranslatef(0, 40 ,-0);
+	glRotatef(95,0,1,0);
+	models[4]->draw();
+
+
+
+	glPopMatrix();
+}
 void display (void) 
 {
 	
@@ -347,7 +359,7 @@ void display (void)
 	drawWorld(); 	// the world
 	drawChicken();
 	drawSun();
-	
+	drawEnv();
 
 
 	glutSwapBuffers(); //swap the buffers
@@ -362,6 +374,7 @@ void reshape (int w, int h) {
 	gluPerspective (60, (GLfloat)w / (GLfloat)h, 0.1, 1000.0); //set the perspective (angle of sight, width, height, , depth)
 	glMatrixMode (GL_MODELVIEW); //set the matrix back to model
 }
+
 
 void keyboard (unsigned char key, int x, int y) {
 	if (key=='q')
