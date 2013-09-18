@@ -39,17 +39,12 @@ float lx=0.0f,lz=-1.0f;
 // XZ position of the camera
 float x=0.0f, y= 6.0f, z=5.0f ;
 
-// the key states. These variables will be zero
-//when no key is being presses
-//float deltaAngle = 0.0f;
-//float deltaMove = 0;
-//int xOrigin = -1, yOrigin = -1;
-//bool warped = true;
-//float xrottemp =0,yrottemp = 0;
+
 //angle of rotation + positions
 float xpos = 0, ypos = 0, zpos = 0, xrot = 8, yrot = 0;
 
-float cRadius = 10.0f; // our radius distance from our character
+// our radius distance from our character
+float cRadius = 10.0f; 
 
 float lastx, lasty;
 
@@ -306,37 +301,33 @@ void drawChicken() // just a cube
 	glPushMatrix();
 	
 	//checks if chicken is in range, if not, move him towards the player
-
+	int radius = 5 ; // the radius in which the chicken should not move
 	//move chicken to the left
-	if(xpos + 5 < chickenX )
-	{
-		chickenX -= 0.5f;
-	}
-	//move chicken to the right
-	else if(xpos -5  > chickenX )
-	{
-		chickenX += 0.5f;
-	}
-	//move chicken down
-	if(zpos +5 < chickenZ)
-	{
-		chickenZ -= 0.5f;
-	}
-	//move chicken up
-	else if(zpos -5 > chickenZ )
-	{
-		chickenZ += 0.5f;
-	}
+//	for(int ii = 0 ; ii < radius ; ii++)
+//	{
+		if(chickenX > xpos + radius)
+		{
+			chickenX -= 0.5f;
+		}
+		if(chickenX < xpos - radius)
+		{
+			chickenX += 0.5f;
+		}
+		if(chickenZ > zpos + radius)
+		{
+			chickenZ -= 0.5f;
+		}
+		if(chickenZ < zpos - radius)
+		{
+			chickenZ += 0.5f;
+		}
 
-	float angle = atan2(chickenZ - zpos, chickenX - xpos);
 
-//Of course the return type is in radians, if you need it in degrees just do angle * 180 / PI
+	float angle = atan2(xpos - chickenX, zpos - chickenZ);
+	//Of course the return type is in radians, if you need it in degrees just do angle * 180 / PI
 	glTranslatef(chickenX, chickenY, chickenZ);
-	glRotatef( 180 ,0.0,1,0.0);
 	glRotatef( angle* 180 / PI ,0.0,1,0.0); 
-	
-	//glutSolidCube(2); //draw the cube
-		models[3]->draw(); // draw the chicken!!
+	models[3]->draw(); // draw the chicken!!
 		
 	glPopMatrix();
 
