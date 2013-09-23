@@ -17,22 +17,17 @@
 #include <Windows.h>
 #include "loadTGA.h"
 #include "ObjModel.h"
-#include "block.h"
-#include <math.h>       /* atan */
+#include <math.h>    
 
 #define PI 3.14159265
 #define TEXTURE_COUNT 12
 
-//GLuint textures[TEXTURE_COUNT];
-//const char *TextureFiles[TEXTURE_COUNT] = {"rock1.tga"};
-	//"wood.tga","sand.tga","glass.tga","tree.tga","leaves.tga"};
+
 
 int screenwidth= 1024, screenheight = 700;
 bool isTextureLoaded = 0;
+
 vector<ObjModel*> models;
-
-vector<block> blocks;
-
 // actual vector representing the camera's direction
 float lx=0.0f,lz=-1.0f;
 
@@ -45,21 +40,15 @@ float xpos = 0, ypos = 0, zpos = 0, xrot = 8, yrot = 0;
 
 // our radius distance from our character
 float cRadius = 10.0f; 
-
+//x and Y positions for the mousemovement, so we know where the mouse was lasttime.
 float lastx, lasty;
-
-//positions of the cubes
-float positionz[10];
-float positionx[10];
-
-//vector<Vec3f> *vertices;
 
 
 //jumping params
 float MaxJump=1.7; // max height of jump
 float Gravity=1.05; // manipulates max jump
 float SubMaxJump= MaxJump; //constant that restores MaxJump
-float y2=0; // Y position
+float y2= 0; // Y position
 float yOrigin = y2; // Constant that restores y back to it's origin
 bool Jumping=false; //Jumping flag
 bool Falling=false; //Falling flag
@@ -67,73 +56,23 @@ bool JumpOK=true; //Is it okay to jump?
 bool spacerelease = true;
 bool wPressed , sPressed, qPressed, zPressed = false;
 
-
-
-
-void cubepositions (void) { //set the positions of the cubes
-	for (int i=0;i<10;i++)
-	{
-	positionz[i] = rand()%5 + 1;
-	positionx[i] = rand()%5 + 1;
-	}
-}
-
-//draw the cube
-void cube(void) {
-	for (int i=0;i<10 - 1;i++)
-	{
-	glPushMatrix();
-	glTranslated(-positionx[i + 1] * 10, 0, -positionz[i + 1] * 10); //translate the cube
-	glutSolidCube(2); //draw the cube
-	glPopMatrix();
-	}
-}
-
-void floor(void)
-{
-	
-	unsigned int GridSizeX = 16;
-	unsigned int GridSizeY = 16;
-	unsigned int SizeX = 8;
-	unsigned int SizeY = 8;
-	
-	glPushMatrix();
-	glTranslated(-positionx[1] * 10,-1, -positionz[1] * 10);
-	glRotatef(90,1.0,0.0,0.0);
-	glBegin(GL_QUADS);
-	for (unsigned int x =0;x<GridSizeX;++x)
-		for (unsigned int y =0;y<GridSizeY;++y)
-		{
-			if ((x+y)& 0x00000001) //modulo 2
-				glColor3f(1.0f,1.0f,1.0f); //white
-			else
-				glColor3f(0.0f,0.0f,0.0f); //black
- 
-			glVertex2f(    x*SizeX,    y*SizeY);
-			glVertex2f((x+1)*SizeX,    y*SizeY);
-			glVertex2f((x+1)*SizeX,(y+1)*SizeY);
-			glVertex2f(    x*SizeX,(y+1)*SizeY);
- 
-		}
-	glEnd();
-	glPopMatrix();
-}
+//var for the size of the planetary orbitation of the "sun"
+float planetorb  = 1;
 
 void loadModels()
 {
-	//models.push_back(new ObjModel("models/world4export.obj"));
+
 	models.push_back(new ObjModel("models/world3.obj"));
 	models.push_back(new ObjModel("models/steve.obj"));
 	models.push_back(new ObjModel("models/sun.obj"));
 	models.push_back(new ObjModel("models/kip.obj"));
-	models.push_back(new ObjModel("models/sphere.obj"));
+	models.push_back(new ObjModel("models/sphere2.obj"));
 }
 
 void init (void) {
 	xpos = -31;
 	zpos = -31;
 	yrot = 140;
-	cubepositions();
 	loadModels();
 }
 
@@ -142,22 +81,13 @@ void enable (void) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	//glEnable(GL_LIGHT1);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_AUTO_NORMAL);
-	//LIGHTINGGG
-	//GLfloat light_diffuse[] = { 255, 244 , 150, 0 }; // = { 255, 244 , 196, 1 }; 
-	//GLfloat pos[] = { 0, 20 , -0, 1 };
-
-	//glLightfv(GL_LIGHT1, GL_AMBIENT_AND_DIFFUSE, light_diffuse);
-	//glLightf(GL_LIGHT1, GL_POSITION, *pos);
-
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
-	//glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
+	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
+
 }
 
 void handleJump()
@@ -166,8 +96,12 @@ void handleJump()
 /*If you're jumping, divide MaxJump by Gravity so it will slowly get smaller, and add MaxJump to y so the character moves up*/
 
 if(Jumping)
-{
-	if(wPressed)
+{ 
+	//code so whenver we are jumping, we can still move forward.
+	// this to enable the player to jump forward and backwards
+	
+
+	if(wPressed) 
 	{
 		float xrotrad, yrotrad;
 		yrotrad = (yrot / 180 * 3.141592654f);
@@ -190,16 +124,17 @@ if(Jumping)
     ypos += MaxJump;
 }
  
-/*If MaxJump has run out, our character is no longer jumping, but falling*/
+//if MaxJump has run out, our character is no longer jumping, but falling
 if(MaxJump <= 1)
 {
     Falling=true;
     Jumping=false;
 }
  
-/*Opposite of Jumping*/
+//Opposite of Jumping
 if(Falling)
 {
+	// stil able to fall "backwards"
 	if(wPressed)
 	{
 		float xrotrad, yrotrad;
@@ -223,12 +158,14 @@ if(Falling)
     ypos -= MaxJump;
 }
  
-/*Keeps MaxJump from getting higher than 4, so the character doesn't fall at large intervals.*/
+//Keeps MaxJump from getting higher than 4, so the character doesn't fall at large intervals
 if(Falling && MaxJump > 4)
 {
 	MaxJump = 4;
 }
-/*If the block is back to it's y origin, make both jumping and falling false, and assign MaxJump to constant SubMaxJump to restore it back to normal. It's not okay to jump again unless you release the UP key, and then press it again.*/
+/*If the player is back to it's y origin, 
+make both jumping and falling false, and assign MaxJump to constant SubMaxJump 
+to restore it back to normal. */
 	if(ypos <= yOrigin )
 	{
 		Jumping=false;
@@ -246,38 +183,33 @@ if(Falling && MaxJump > 4)
 	}
 }
 
-
-
 void drawWorld()
 {
 	glPushMatrix();
-	glTranslatef(0 ,-16.4, 0);
-	models[0]->draw();
+	glTranslatef(0 ,-16.4, 0);// -16.4 is to place the world exacly beneath the player.
+	models[0]->draw(); // draw the world model.
 	glPopMatrix();
 }
 
 void drawPlayer()
 {
-	glTranslatef(0.0f, 0.0f, -cRadius);
-	glRotated(xrot,1.0, 0.0 ,0.0);
-
-	models[1]->draw();
-
-	std::cout << xrot << std::endl;
-	glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
+	glTranslatef(0.0f, 0.0f, -cRadius); // distance from player
+	glRotated(xrot,1.0, 0.0 ,0.0);		// rotation bases on mous
+	models[1]->draw(); // draw the player model
+    glRotatef(yrot,0.0,1.0,0.0);  //rotate our camera on the y-axis (up and down)
 	glTranslated(-xpos,-ypos,-zpos); //translate the screen to the position of our camera
 
 }
 
-
-float planetorb  = 1;
 void drawSun()
 {
 	glPushMatrix();
 	
-	glTranslatef(0, 20 , -0);
+	glTranslatef(0, 20 , -0);         // translate planet at a -20 height.
+	
 	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet.
     glTranslatef(110,0.0,0.0);        // sets the radius of the orbit 
+	glRotatef(planetorb,1,0.0,01.0);
 	models[2]->draw();
 	
 	if(qPressed)
@@ -302,32 +234,34 @@ void drawChicken() // just a cube
 	glPushMatrix();
 	
 	//checks if chicken is in range, if not, move him towards the player
-	int radius = 5 ; // the radius in which the chicken should not move
-	//move chicken to the left
-//	for(int ii = 0 ; ii < radius ; ii++)
-//	{
+	int radius = 5 ; // the radius in which the chicken should not move ( the player needs his space!)
+
+	//move chicken to the left (based on a 2d XZ coordinate map) 
 		if(chickenX > xpos + radius)
 		{
 			chickenX -= 0.5f;
 		}
+		//move the chicken to the right
 		if(chickenX < xpos - radius)
 		{
 			chickenX += 0.5f;
 		}
+		//move up
 		if(chickenZ > zpos + radius)
 		{
 			chickenZ -= 0.5f;
 		}
+		//move down
 		if(chickenZ < zpos - radius)
 		{
 			chickenZ += 0.5f;
 		}
+	glTranslatef(chickenX, chickenY, chickenZ); // actual movement of the chicken
 
-
-	float angle = atan2(xpos - chickenX, zpos - chickenZ);
-	//Of course the return type is in radians, if you need it in degrees just do angle * 180 / PI
-	glTranslatef(chickenX, chickenY, chickenZ);
-	glRotatef( angle* 180 / PI ,0.0,1,0.0); 
+	// determine the angle at which the chicken is moving, rotate him in that direction so he is facing the player.
+	// Of course the return type is in radians, and I need it in degrees so we do angle * 180 / PI
+	float angle = atan2(xpos - chickenX, zpos - chickenZ);		
+	glRotatef( angle* 180 / PI ,0.0,1,0.0);  //actual rotating of the chicken
 	models[3]->draw(); // draw the chicken!!
 		
 	glPopMatrix();
@@ -336,12 +270,9 @@ void drawChicken() // just a cube
 void drawEnv()
 {
 	glPushMatrix();
-	glTranslatef(0, 40 ,-0);
-	glRotatef(95,0,1,0);
-	models[4]->draw();
-
-
-
+	glTranslatef(0, 40 ,-0); // place the spherical enviroment as 40height
+	glRotatef(95,0,1,0);	// rotate it a bit so it looks more fancy 
+	models[4]->draw();	// draw the sphere!
 	glPopMatrix();
 }
 void display (void) 
@@ -357,11 +288,10 @@ void display (void)
 
 	drawPlayer();	 //draw the player in front of the camera	
 	drawWorld(); 	// the world
-	drawChicken();
-	drawSun();
-	drawEnv();
-
-
+	drawChicken(); // handle the chicken!
+	drawSun();		// sun handler
+	drawEnv();		// build the spherical enviroment.
+	collide();
 	glutSwapBuffers(); //swap the buffers
 	
 
@@ -493,7 +423,7 @@ void mouseMovement(int x, int y) {
 	//std::cout << "x rotation "<<xrot<< std::endl;
 	yrot += (float) diffx;	//set the yrot to yrot with the addition of the difference in the x position
 
-	//check for unuseable angles
+	//check for the allowed angles, +90 goes glitchy, en below 1 you are inside the floor, which is unpleasant.
 	if(xrot < 1)
 	{
 		xrot = 1;
@@ -504,7 +434,7 @@ void mouseMovement(int x, int y) {
 		xrot = 90;
 		
 	}
-	//cout << xrot << std::endl;
+
 }
 
 void idle()
@@ -518,9 +448,9 @@ int main (int argc, char **argv)
 	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 	glutInitWindowSize (500, 500); 
 	glutInitWindowPosition (100, 100);
-    glutCreateWindow ("A basic OpenGL Window"); 
-	enable();
-	init (); 
+    glutCreateWindow ("Chicken stalker v2!"); 
+	enable(); // set the glenables etc.
+	init (); // load models and other things
     glutDisplayFunc (display); 
 	glutIdleFunc (idle); 
 	glutKeyboardUpFunc(keyboardUp);
