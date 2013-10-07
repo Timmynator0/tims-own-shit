@@ -18,13 +18,16 @@
 #include "loadTGA.h"
 #include "ObjModel.h"
 #include <math.h>    
+#include <string>
+#include <sstream>
+
 
 #define PI 3.14159265
 #define TEXTURE_COUNT 12
 
 
 
-int screenwidth= 1024, screenheight = 700;
+int screenwidth= 1366, screenheight = 768;
 bool isTextureLoaded = 0;
 
 vector<ObjModel*> models;
@@ -83,10 +86,18 @@ void enable (void) {
 	glEnable(GL_LIGHT0);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT_AND_BACK,GL_EMISSION);
+
+//	glEnable(GL_COLOR_MATERIAL);
+//	glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
+
+
+
+
+
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
 	glShadeModel (GL_SMOOTH); //set the shader to smooth shader
+
+
 
 }
 
@@ -205,22 +216,53 @@ void drawSun()
 {
 	glPushMatrix();
 	
-	glTranslatef(0, 20 , -0);         // translate planet at a -20 height.
+	glTranslatef(0, 20 , -0);         // translate planet at a 20 height.
 	
 	glRotatef(planetorb,0.0,0.0,1.0); // orbits the planet.
     glTranslatef(110,0.0,0.0);        // sets the radius of the orbit 
-	glRotatef(planetorb,1,0.0,01.0);
+
+
+	GLfloat ambientLight[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
+	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	GLfloat position[] = { 0, 20, 0, 1.0f };
+
+	// Assign created components to GL_LIGHT0
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	glDisable(GL_COLOR_MATERIAL);
 	models[2]->draw();
-	
+	glEnable(GL_COLOR_MATERIAL);
+
+	std::cout << "planetorb = "<<planetorb<< std::endl;
+	if (planetorb > 360 )
+	{
+		planetorb = 0;
+	}
+	if(planetorb < 0)
+	{
+		planetorb = 360;
+	}
 	if(qPressed)
 	{
-		planetorb ++;
-		planetorb ++;
+		planetorb += 2;
+		
 	}
 	else if(zPressed)
 	{
-		planetorb --;
-		planetorb --;
+		planetorb -= 2;
+	
+	}
+
+	if(planetorb <= 320 && planetorb >= 200 )
+	{	
+		glDisable(GL_LIGHT0);
+	}
+	else
+	{
+		glEnable(GL_LIGHT0);
 	}
 
   glPopMatrix();
@@ -269,11 +311,14 @@ void drawChicken() // just a cube
 }
 void drawEnv()
 {
+
+
 	glPushMatrix();
 	glTranslatef(0, 40 ,-0); // place the spherical enviroment as 40height
 	glRotatef(95,0,1,0);	// rotate it a bit so it looks more fancy 
 	models[4]->draw();	// draw the sphere!
 	glPopMatrix();
+
 }
 void display (void) 
 {
@@ -291,7 +336,12 @@ void display (void)
 	drawChicken(); // handle the chicken!
 	drawSun();		// sun handler
 	drawEnv();		// build the spherical enviroment.
-	collide();
+
+
+
+		// Create light components
+
+
 	glutSwapBuffers(); //swap the buffers
 	
 
@@ -365,6 +415,7 @@ void keyboard (unsigned char key, int x, int y) {
 
 	if (key==27)// esc key :3
 	{
+		glutLeaveGameMode();
 	exit(0);
 	}
 
@@ -409,6 +460,16 @@ void keyboardUp(unsigned char key, int x, int y)
 }
 
 void mouseMovement(int x, int y) {
+
+	if(x < 5) 
+	{
+		glutWarpPointer(screenwidth-10, y);
+	}
+	else if( x > screenwidth-5) 
+	{
+		glutWarpPointer(10,y);
+	}
+
 	int diffx=x-lastx; //check the difference between the current x and the last x position
 	int diffy=y-lasty; //check the difference between the current y and the last y position
 	lastx=x; //set lastx to the current x position
@@ -442,13 +503,21 @@ void idle()
 	Sleep(1);
 	glutPostRedisplay();
 }
+
+
 int main (int argc, char **argv) 
 {
     glutInit (&argc, argv);
 	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
-	glutInitWindowSize (500, 500); 
-	glutInitWindowPosition (100, 100);
-    glutCreateWindow ("Chicken stalker v2!"); 
+
+	screenwidth = (float) GetSystemMetrics(0);
+	screenheight = (float) GetSystemMetrics(1);
+
+	stringstream ss;
+	ss << screenwidth<<"x"<<screenheight<<":32@60";
+	glutGameModeString( ss.str().c_str() ); //the settings for fullscreen mode	
+	glutEnterGameMode();
+	glutSetCursor(GLUT_CURSOR_NONE); // hide THA CURSOR!
 	enable(); // set the glenables etc.
 	init (); // load models and other things
     glutDisplayFunc (display); 
