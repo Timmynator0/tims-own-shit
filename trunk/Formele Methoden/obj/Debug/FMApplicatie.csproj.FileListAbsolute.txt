@@ -1,0 +1,18 @@
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\bin\Debug\FMApplicatie.exe.config
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\bin\Debug\FMApplicatie.exe
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\bin\Debug\FMApplicatie.pdb
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.Form1.resources
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.Properties.Resources.resources
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.csproj.GenerateResource.Cache
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.exe
+C:\Users\Vincent\Documents\Visual Studio 2012\Projects\FMApplicatie\obj\Debug\FMApplicatie.pdb
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\bin\Debug\FMApplicatie.exe.config
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.exe
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.pdb
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\bin\Debug\FMApplicatie.exe
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\bin\Debug\FMApplicatie.pdb
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.Form1.resources
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.Properties.Resources.resources
+C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.csproj.GenerateResource.Cache
