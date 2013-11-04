@@ -16,3 +16,13 @@ C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.csprojResolv
 C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.Form1.resources
 C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.Properties.Resources.resources
 C:\Users\Tim\Desktop\3dgraphics\FMApplicatie\obj\Debug\FMApplicatie.csproj.GenerateResource.Cache
+C:\Users\Tim\Desktop\Formele Methoden\bin\Debug\FMApplicatie.exe.config
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.exe
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.pdb
+C:\Users\Tim\Desktop\Formele Methoden\bin\Debug\FMApplicatie.exe
+C:\Users\Tim\Desktop\Formele Methoden\bin\Debug\FMApplicatie.pdb
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.Form1.resources
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.Properties.Resources.resources
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.csproj.GenerateResource.Cache
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.MainForm.resources
+C:\Users\Tim\Desktop\Formele Methoden\obj\Debug\FMApplicatie.addArrowForm.resources
