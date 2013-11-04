@@ -187,6 +187,7 @@
             this.button9.TabIndex = 16;
             this.button9.Text = "Converteer naar Reg.Exp";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -292,6 +293,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.inputBox);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
