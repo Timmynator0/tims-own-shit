@@ -12,8 +12,7 @@ namespace FMApplicatie
         public Dfa()
         {
         }
-        public Dfa(Automaat automaat)
-            : base(automaat)
+        public Dfa(Automaat automaat)  : base(automaat)
         {
             toDfa();
         }
@@ -171,11 +170,14 @@ namespace FMApplicatie
                         Toestand toestand = getToestandVanId(id);
 
                         // Controleer gelijk of het een eindtoestand is
-                        if((toestand.getCategory() & Toestand.Category.Eind) == Toestand.Category.Eind)
-                            isEindtoestand = true;
+                       if ((toestand.getCategory() & Toestand.Category.Eind) == Toestand.Category.Eind)
+                                isEindtoestand = true;
 
+                      
                         // Maak een lijst van de uitgaande pijlen
+
                         alleUitgaandePijlen.AddRange(toestand.geefUitgaandePijlen());
+
                     }
 
                     // De nieuwe toestand
@@ -247,12 +249,19 @@ namespace FMApplicatie
 
         private void verwijderPijl(Pijl oudePijl)
         {
-            foreach (Toestand toestand in toestanden)
+            //            foreach (Toestand toestand in toestanden)
+            //{
+            //    // Verwijder de oude pijl indien deze bestaat
+            //    toestand.geefUitgaandePijlen().Remove(oudePijl);
+            //    toestand.geefInkomendePijlen().Remove(oudePijl);
+            //}
+            Parallel.ForEach(toestanden, toestand =>
             {
                 // Verwijder de oude pijl indien deze bestaat
                 toestand.geefUitgaandePijlen().Remove(oudePijl);
                 toestand.geefInkomendePijlen().Remove(oudePijl);
             }
+            );
         }
     }
 }
