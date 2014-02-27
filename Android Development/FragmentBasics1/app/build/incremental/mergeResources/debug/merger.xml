@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="article_view"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\layout\article_view.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="news_articles"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\layout\news_articles.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="news_articles"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\layout-large\news_articles.xml"
+                qualifiers="large"
+                type="layout" />
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\values\arrays.xml"
+                qualifiers="" >
+                <string-array name="Articles" >
+                    <item>
+Article 1\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 2\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 3\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 4\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 5\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 6\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 7\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 8\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 9\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 10\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 11\n\n WHOOP DIE BLAAA
+                    </item>
+                    <item>
+Article 12\n\n WHOOP DIE BLAAA
+                    </item>
+                </string-array>
+                <string-array name="Headlines" >
+                    <item>
+Cat found to be alive!
+                    </item>
+                    <item>
+Article 2
+                    </item>
+                    <item>
+And here is a number 3
+                    </item>
+                    <item>
+And here is a number 4
+                    </item>
+                    <item>
+And here is a number 5
+                    </item>
+                    <item>
+And here is a number 6
+                    </item>
+                    <item>
+And here is a number 7
+                    </item>
+                    <item>
+And here is a number 8
+                    </item>
+                    <item>
+And here is a number 9
+                    </item>
+                    <item>
+And here is a number 10
+                    </item>
+                    <item>
+And here is a number 11
+                    </item>
+                    <item>
+And here is a number 12
+                    </item>
+                </string-array>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >Fragment Basics
+                </string>
+            </file>
+        </source>
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\build\res\rs\debug" />
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics1\app\src\debug\res" />
+    </dataSet>
+
+</merger>
