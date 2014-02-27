@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\drawable-ldpi\ic_launcher.png"
+                qualifiers="ldpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="article_view"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\layout\article_view.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="news_articles"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\layout\news_articles.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="news_articles"
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\layout-large\news_articles.xml"
+                qualifiers="large"
+                type="layout" />
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="app_name" >Fragment Basics
+                </string>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\values\colors.xml"
+                qualifiers="" >
+                <color name="holo_blue" >#FF33B5E5
+                </color>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\values\bools.xml"
+                qualifiers="" >
+                <bool name="has_two_panes" >
+false
+                </bool>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\values\dimens.xml"
+                qualifiers="" >
+                <dimen name="padding" >16dp
+                </dimen>
+                <dimen name="listview_item_padding" >16dp
+                </dimen>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\main\res\values\styles.xml"
+                qualifiers="" >
+
+                <style name="quickContactBadgeStyle" >
+                    <item name="android:background">
+@drawable/quickcontact_badge_small
+                    </item>
+                </style>
+
+                <style
+                    name="contactNameTitle"
+                    parent="@android:style/TextAppearance.Large" >
+                    <item name="android:textSize">
+38sp
+                    </item>
+                    <item name="android:fontFamily">
+sans-serif
+                    </item>
+                    <item name="android:textIsSelectable">
+true
+                    </item>
+                </style>
+
+                <style name="listViewActivatedStyle" />
+
+                <style name="searchTextHiglight" >
+                    <item name="android:textColor">
+@color/holo_blue
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                </style>
+
+                <style
+                    name="addressHeader"
+                    parent="@android:style/TextAppearance.Small" >
+                    <item name="android:textAllCaps">
+true
+                    </item>
+                    <item name="android:textStyle">
+bold
+                    </item>
+                </style>
+
+                <style name="ContactListView" >
+                    <item name="android:verticalScrollbarPosition">
+right
+                    </item>
+                    <item name="android:fastScrollAlwaysVisible">
+true
+                    </item>
+                    <item name="android:scrollbarStyle">
+outsideInset
+                    </item>
+                </style>
+
+                <style
+                    name="addressDetail"
+                    parent="@android:style/TextAppearance.Medium" >
+                    <item name="android:fontFamily">
+sans-serif-light
+                    </item>
+                    <item name="android:textIsSelectable">
+true
+                    </item>
+                </style>
+
+                <style
+                    name="AppTheme"
+                    parent="@android:style/Theme" />
+
+                <style name="addressButton" />
+            </file>
+        </source>
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\build\res\rs\debug" />
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\FragmentBasics\app\src\debug\res" />
+    </dataSet>
+
+</merger>
