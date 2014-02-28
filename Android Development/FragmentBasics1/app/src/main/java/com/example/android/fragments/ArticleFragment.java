@@ -26,7 +26,7 @@ import android.widget.TextView;
 public class ArticleFragment extends Fragment {
     final static String ARG_POSITION = "position";
     int mCurrentPosition = -1;
-
+    String[] articles;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class ArticleFragment extends Fragment {
         // applied to the fragment at this point so we can safely call the method
         // below that sets the article text.
         Bundle args = getArguments();
+       articles = getResources().getStringArray(R.array.Articles);
         if (args != null) {
             // Set article based on argument passed in
             updateArticleView(args.getInt(ARG_POSITION));
@@ -62,12 +63,10 @@ public class ArticleFragment extends Fragment {
 
     public void updateArticleView(int position) {
         TextView article = (TextView) getActivity().findViewById(R.id.article);
-        TypedArray ids = getResources().obtainTypedArray(R.array.Articles);
-
-// Get resource id by its index
 
 
-        article.setText(ids.getResourceId(position, -1));
+
+        article.setText(articles[position]);
         mCurrentPosition = position;
     }
 
