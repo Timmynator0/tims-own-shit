@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values-nl/arrays.xml -->
+    <eat-comment />
+
+    <string-array name="duration">
+        <item>6 uur</item>
+        <item>12 uur</item>
+        <item>1 dag</item>
+        <item>5 dagen</item>
+        <item>2 weken</item>
+        <item>1 maand</item>
+        <item>3 maanden</item>
+        <item>half jaar</item>
+    </string-array>
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values-nl/strings.xml -->
+    <eat-comment />
+
+    <string name="air_pressure">Luchtdruk</string>
+    <string name="app_name">AWS app</string>
+    <string name="humidity">Luchtvochtigheid</string>
+    <string name="rain_rate">Neerslag</string>
+    <string name="temperature">Temperatuur</string>
+    <string name="unknown">Onbekend</string>
+    <string name="wind_direction">Windrichting</string>
+    <string name="wind_speed">Windsnelheid</string>
+
+</resources>

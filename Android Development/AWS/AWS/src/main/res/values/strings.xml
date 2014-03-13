@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AWS app</string>
+    <string name="air_pressure">Air pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="rain_rate">Rain rate</string>
+    <string name="temperature">Temperature</string>
+    <string name="wind_direction">Wind direction</string>
+    <string name="wind_speed">Wind speed</string>
+    <string name="unknown">Unknown</string>
+
+</resources>

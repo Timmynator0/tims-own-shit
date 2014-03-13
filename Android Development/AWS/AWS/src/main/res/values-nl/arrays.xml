@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="duration">
+        <item>6 uur</item>
+        <item>12 uur</item>
+        <item>1 dag</item>
+        <item>5 dagen</item>
+        <item>2 weken</item>
+        <item>1 maand</item>
+        <item>3 maanden</item>
+        <item>half jaar</item>
+    </string-array>
+</resources>

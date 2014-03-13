@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res" >
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\drawable-hdpi\ic_launcher.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\drawable-mdpi\ic_launcher.png"
+                qualifiers="mdpi"
+                type="drawable" />
+            <file
+                name="arrow"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\drawable-xhdpi\arrow.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\drawable-xhdpi\ic_launcher.png"
+                qualifiers="xhdpi"
+                type="drawable" />
+            <file
+                name="ic_launcher"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\drawable-xxhdpi\ic_launcher.png"
+                qualifiers="xxhdpi"
+                type="drawable" />
+            <file
+                name="activity_graph"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\activity_graph.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_main"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\activity_main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_graph"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\fragment_graph.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_main"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\fragment_main.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="list_item"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\list_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="list_item_image"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\list_item_image.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="simple_spinner_item"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout\simple_spinner_item.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="activity_main"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout-sw600dp\activity_main.xml"
+                qualifiers="sw600dp"
+                type="layout" />
+            <file
+                name="activity_main"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\layout-sw600dp-port\activity_main.xml"
+                qualifiers="sw600dp-port"
+                type="layout" />
+            <file
+                name="main"
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\menu\main.xml"
+                qualifiers=""
+                type="menu" />
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values\arrays.xml"
+                qualifiers="" >
+                <string-array name="duration" >
+                    <item>
+6 hours
+                    </item>
+                    <item>
+12 hours
+                    </item>
+                    <item>
+1 day
+                    </item>
+                    <item>
+5 days
+                    </item>
+                    <item>
+2 weeks
+                    </item>
+                    <item>
+1 month
+                    </item>
+                    <item>
+3 months
+                    </item>
+                    <item>
+half year
+                    </item>
+                </string-array>
+                <string-array
+                    name="interval_id"
+                    translatable="false" >
+                    <item>
+0
+                    </item>
+                    <item>
+30
+                    </item>
+                    <item>
+60
+                    </item>
+                    <item>
+300
+                    </item>
+                    <item>
+900
+                    </item>
+                    <item>
+1800
+                    </item>
+                    <item>
+10800
+                    </item>
+                    <item>
+21600
+                    </item>
+                </string-array>
+                <string-array
+                    name="duration_id"
+                    translatable="false" >
+                    <item>
+6hours
+                    </item>
+                    <item>
+12hours
+                    </item>
+                    <item>
+24hours
+                    </item>
+                    <item>
+5days
+                    </item>
+                    <item>
+14days
+                    </item>
+                    <item>
+31days
+                    </item>
+                    <item>
+90days
+                    </item>
+                    <item>
+180days
+                    </item>
+                </string-array>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values\bools.xml"
+                qualifiers="" >
+                <bool name="isTablet" >
+false
+                </bool>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values\dimens.xml"
+                qualifiers="" >
+                <dimen name="activity_horizontal_margin" >16dp
+                </dimen>
+                <dimen name="activity_vertical_margin" >16dp
+                </dimen>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values\strings.xml"
+                qualifiers="" >
+                <string name="wind_direction" >Wind direction
+                </string>
+                <string name="wind_speed" >Wind speed
+                </string>
+                <string name="app_name" >AWS app
+                </string>
+                <string name="humidity" >Humidity
+                </string>
+                <string name="temperature" >Temperature
+                </string>
+                <string name="unknown" >Unknown
+                </string>
+                <string name="rain_rate" >Rain rate
+                </string>
+                <string name="air_pressure" >Air pressure
+                </string>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values\styles.xml"
+                qualifiers="" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Light" >
+
+                    <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+                    -->
+                </style>
+
+                <style
+                    name="AppTheme"
+                    parent="AppBaseTheme" >
+
+                    <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                </style>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-nl\arrays.xml"
+                qualifiers="nl" >
+                <string-array name="duration" >
+                    <item>
+6 uur
+                    </item>
+                    <item>
+12 uur
+                    </item>
+                    <item>
+1 dag
+                    </item>
+                    <item>
+5 dagen
+                    </item>
+                    <item>
+2 weken
+                    </item>
+                    <item>
+1 maand
+                    </item>
+                    <item>
+3 maanden
+                    </item>
+                    <item>
+half jaar
+                    </item>
+                </string-array>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-nl\strings.xml"
+                qualifiers="nl" >
+                <string name="wind_speed" >Windsnelheid
+                </string>
+                <string name="unknown" >Onbekend
+                </string>
+                <string name="rain_rate" >Neerslag
+                </string>
+                <string name="air_pressure" >Luchtdruk
+                </string>
+                <string name="temperature" >Temperatuur
+                </string>
+                <string name="humidity" >Luchtvochtigheid
+                </string>
+                <string name="wind_direction" >Windrichting
+                </string>
+                <string name="app_name" >AWS app
+                </string>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-sw600dp\bools.xml"
+                qualifiers="sw600dp" >
+                <bool name="isTablet" >
+true
+                </bool>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-sw720dp-land\dimens.xml"
+                qualifiers="sw720dp-land" >
+                <dimen name="activity_horizontal_margin" >128dp
+                </dimen>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-v11\styles.xml"
+                qualifiers="v11" >
+
+                <style
+                    name="AppBaseTheme"
+                    parent="android:Theme.Holo.Light" >
+
+                    <!-- API 11 theme customizations can go here. -->
+                </style>
+            </file>
+            <file
+                path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\res\values-w820dp\dimens.xml"
+                qualifiers="w820dp" >
+                <dimen name="activity_horizontal_margin" >64dp
+                </dimen>
+            </file>
+        </source>
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\build\res\rs\debug" />
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\build\res\generated\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\debug\res" />
+    </dataSet>
+
+</merger>
