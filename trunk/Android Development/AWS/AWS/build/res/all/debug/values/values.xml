@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/arrays.xml -->
+    <eat-comment />
+
+    <string-array name="duration">
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>1 day</item>
+        <item>5 days</item>
+        <item>2 weeks</item>
+        <item>1 month</item>
+        <item>3 months</item>
+        <item>half year</item>
+    </string-array>
+    <string-array name="duration_id" translatable="false">
+        <item>6hours</item>
+        <item>12hours</item>
+        <item>24hours</item>
+        <item>5days</item>
+        <item>14days</item>
+        <item>31days</item>
+        <item>90days</item>
+        <item>180days</item>
+    </string-array>
+    <string-array name="interval_id" translatable="false">
+        <item>0</item>
+        <item>30</item>
+        <item>60</item>
+        <item>300</item>
+        <item>900</item>
+        <item>1800</item>
+        <item>10800</item>
+        <item>21600</item>
+    </string-array>
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/bools.xml -->
+    <eat-comment />
+
+    <bool name="isTablet">false</bool>
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/dimens.xml -->
+    <eat-comment />
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="air_pressure">Air pressure</string>
+    <string name="app_name">AWS app</string>
+    <string name="humidity">Humidity</string>
+    <string name="rain_rate">Rain rate</string>
+    <string name="temperature">Temperature</string>
+    <string name="unknown">Unknown</string>
+    <string name="wind_direction">Wind direction</string>
+    <string name="wind_speed">Wind speed</string>
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/styles.xml -->
+    <eat-comment />
+
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+</resources>
