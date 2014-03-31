@@ -20,5 +20,6 @@ android {
 
 dependencies {
 
+    compile files('GraphView-3.1.1.jar');
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

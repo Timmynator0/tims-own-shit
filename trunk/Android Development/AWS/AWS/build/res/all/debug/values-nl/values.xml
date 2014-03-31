@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values-nl/arrays.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values-nl/arrays.xml -->
     <eat-comment />
 
     <string-array name="duration">
@@ -14,7 +14,7 @@
         <item>3 maanden</item>
         <item>half jaar</item>
     </string-array>
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values-nl/strings.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values-nl/strings.xml -->
     <eat-comment />
 
     <string name="air_pressure">Luchtdruk</string>

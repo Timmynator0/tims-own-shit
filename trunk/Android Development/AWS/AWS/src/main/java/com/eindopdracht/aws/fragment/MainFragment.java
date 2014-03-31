@@ -126,8 +126,8 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
         Bundle data = new Bundle();
         data.putInt("index", position);
-        Toast toast = Toast.makeText(this.getActivity(), "Under Construction", Toast.LENGTH_SHORT);
-        toast.show();
+        //Toast toast = Toast.makeText(this.getActivity(), "Under Construction", Toast.LENGTH_SHORT);
+        //toast.show();
         if(isTablet) {
             // Add Fragment
             Fragment graphFragment = new GraphViewFragment();
