@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/arrays.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/arrays.xml -->
     <eat-comment />
 
     <string-array name="duration">
@@ -34,16 +34,16 @@
         <item>10800</item>
         <item>21600</item>
     </string-array>
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/bools.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/bools.xml -->
     <eat-comment />
 
     <bool name="isTablet">false</bool>
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="air_pressure">Air pressure</string>
@@ -54,7 +54,7 @@
     <string name="unknown">Unknown</string>
     <string name="wind_direction">Wind direction</string>
     <string name="wind_speed">Wind speed</string>
-    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
