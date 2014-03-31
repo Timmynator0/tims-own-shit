@@ -35,7 +35,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-//import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshAttacher;
+
 
 import static com.eindopdracht.aws.data.Constants.CURRENT_VALUE;
 import static com.eindopdracht.aws.data.Constants.DATASTREAMS;
