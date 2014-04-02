@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.eindopdracht.aws.MainActivity" >
     
-    <item android:id="@+id/action_settings"
-        android:title="Settings"
+    <item android:id="@+id/action_interval"
+        android:title="Interval"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="always" />
 </menu>
 <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/menu/main.xml -->

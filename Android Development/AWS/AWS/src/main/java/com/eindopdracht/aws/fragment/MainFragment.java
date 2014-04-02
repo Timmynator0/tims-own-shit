@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -109,25 +111,19 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onPause() {
         super.onPause();
-
         handler.removeCallbacks(handlerRunnable);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         handler.post(handlerRunnable);
     }
-
-
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
         Bundle data = new Bundle();
         data.putInt("index", position);
-        //Toast toast = Toast.makeText(this.getActivity(), "Under Construction", Toast.LENGTH_SHORT);
-        //toast.show();
         if(isTablet) {
             // Add Fragment
             Fragment graphFragment = new GraphViewFragment();
@@ -203,18 +199,14 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         protected void onPostExecute(Void result) {
-
-
             if(listView != null) {
                 final Activity activity = getActivity();
                 if(activity != null) {
                     final ListViewAdapter listViewAdapter = new ListViewAdapter(currentAWSData, activity);
                     listView.setAdapter(listViewAdapter);
                 }
-
                 loader.setVisibility(View.GONE);
             }
-
         }
     }
 }
