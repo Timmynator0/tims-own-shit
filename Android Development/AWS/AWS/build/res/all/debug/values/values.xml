@@ -75,6 +75,7 @@
     <string name="air_pressure">Air pressure</string>
     <string name="app_name">AWS app</string>
     <string name="choose_interval">Choose an interval</string>
+    <string name="current_interval">Current interval = </string>
     <string name="hello_world">Hello world!</string>
     <string name="humidity">Humidity</string>
     <string name="rain_rate">Rain rate</string>

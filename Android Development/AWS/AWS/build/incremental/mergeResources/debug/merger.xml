@@ -118,34 +118,6 @@ half year
                     </item>
                 </string-array>
                 <string-array
-                    name="duration_id"
-                    translatable="false" >
-                    <item>
-6hours
-                    </item>
-                    <item>
-12hours
-                    </item>
-                    <item>
-24hours
-                    </item>
-                    <item>
-5days
-                    </item>
-                    <item>
-14days
-                    </item>
-                    <item>
-31days
-                    </item>
-                    <item>
-90days
-                    </item>
-                    <item>
-180days
-                    </item>
-                </string-array>
-                <string-array
                     name="interval_id"
                     translatable="false" >
                     <item>
@@ -171,6 +143,34 @@ half year
                     </item>
                     <item>
 21600
+                    </item>
+                </string-array>
+                <string-array
+                    name="duration_id"
+                    translatable="false" >
+                    <item>
+6hours
+                    </item>
+                    <item>
+12hours
+                    </item>
+                    <item>
+24hours
+                    </item>
+                    <item>
+5days
+                    </item>
+                    <item>
+14days
+                    </item>
+                    <item>
+31days
+                    </item>
+                    <item>
+90days
+                    </item>
+                    <item>
+180days
                     </item>
                 </string-array>
             </file>
@@ -234,6 +234,8 @@ false
                 <string name="title_activity_interval" >Interval
                 </string>
                 <string name="rain_rate" >Rain rate
+                </string>
+                <string name="current_interval" >Current interval = 
                 </string>
                 <string name="wind_direction" >Wind direction
                 </string>
@@ -340,17 +342,17 @@ half jaar
                 </string>
                 <string name="unknown" >Onbekend
                 </string>
-                <string name="air_pressure" >Luchtdruk
-                </string>
                 <string name="rain_rate" >Neerslag
                 </string>
-                <string name="humidity" >Luchtvochtigheid
+                <string name="air_pressure" >Luchtdruk
                 </string>
                 <string name="temperature" >Temperatuur
                 </string>
-                <string name="app_name" >AWS app
+                <string name="humidity" >Luchtvochtigheid
                 </string>
                 <string name="wind_direction" >Windrichting
+                </string>
+                <string name="app_name" >AWS app
                 </string>
             </file>
             <file
