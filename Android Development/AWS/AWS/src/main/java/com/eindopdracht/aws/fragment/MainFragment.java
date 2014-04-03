@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 
 import com.eindopdracht.aws.CurrentAWSData;
 import com.eindopdracht.aws.GraphViewActivity;
+import com.eindopdracht.aws.fragment.GraphViewFragment;
 import com.eindopdracht.aws.ListViewAdapter;
 import com.eindopdracht.aws.MainActivity;
 import com.eindopdracht.aws.R;
@@ -56,12 +57,13 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     private ListView listView;
     private ProgressBar loader;
     private Handler handler;
-
+   private Fragment graphFragment;
     private final Runnable handlerRunnable = new Runnable() {
         @Override
         public void run() {
             // Update the data
             new DataFetchingTask().execute();
+
             // Schedule the next update in a minute
             handler.postDelayed(this, Constants.ONE_MINUTE);
         }
@@ -113,6 +115,8 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onResume() {
         super.onResume();
         handler.post(handlerRunnable);
+
+
     }
 
     @Override

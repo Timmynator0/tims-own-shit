@@ -1,5 +1,4 @@
-<!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/AndroidManifest.xml -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.eindopdracht.aws">
+<!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.eindopdracht.aws">
 
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="19"/>
 

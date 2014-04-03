@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/arrays.xml -->
-    <eat-comment />
-
-    <string-array name="duration">
-        <item>6 hours</item>
-        <item>12 hours</item>
-        <item>1 day</item>
-        <item>5 days</item>
-        <item>2 weeks</item>
-        <item>1 month</item>
-        <item>3 months</item>
-        <item>half year</item>
-    </string-array>
-    <string-array name="duration_id" translatable="false">
-        <item>6hours</item>
-        <item>12hours</item>
-        <item>24hours</item>
-        <item>5days</item>
-        <item>14days</item>
-        <item>31days</item>
-        <item>90days</item>
-        <item>180days</item>
-    </string-array>
-    <string-array name="interval_id" translatable="false">
-        <item>0</item>
-        <item>30</item>
-        <item>60</item>
-        <item>300</item>
-        <item>900</item>
-        <item>1800</item>
-        <item>10800</item>
-        <item>21600</item>
-    </string-array>
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string-array name="interval_range">
@@ -48,6 +15,17 @@
         <item>180 days</item>
         <item>1 year</item>
     </string-array>
+    <string-array name="interval_range_httpStyle">
+        <item>6hours</item>
+        <item>12hours</item>
+        <item>24hours</item>
+        <item>5days</item>
+        <item>14days</item>
+        <item>31days</item>
+        <item>90days</item>
+        <item>180days</item>
+        <item>1year</item>
+    </string-array>
     <string-array name="interval_values">
         <item>0</item>
         <item>30</item>
@@ -59,16 +37,16 @@
         <item>21600</item>
         <item>43200</item>
     </string-array>
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/bools.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/bools.xml -->
     <eat-comment />
 
     <bool name="isTablet">false</bool>
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/dimens.xml -->
     <eat-comment />
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/strings.xml -->
     <eat-comment />
 
     <string name="action_settings">Settings</string>
@@ -85,7 +63,7 @@
     <string name="unknown">Unknown</string>
     <string name="wind_direction">Wind direction</string>
     <string name="wind_speed">Wind speed</string>
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values/styles.xml -->
     <eat-comment />
 
     <style name="AppBaseTheme" parent="android:Theme.Light">

@@ -23,6 +23,19 @@
         <item>180 days</item>
         <item>1 year</item>
     </string-array>
+
+    <string-array name="interval_range_httpStyle">
+        <item>6hours</item>
+        <item>12hours</item>
+        <item>24hours</item>
+        <item>5days</item>
+        <item>14days</item>
+        <item>31days</item>
+        <item>90days</item>
+        <item>180days</item>
+        <item>1year</item>
+    </string-array>
+
     <string-array name="interval_values">
         <item>0</item>
         <item>30</item>

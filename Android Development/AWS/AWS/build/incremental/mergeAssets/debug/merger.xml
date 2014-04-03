@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\Users\Administrator\AWS\AWS\src\main\assets" />
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\main\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\Users\Administrator\AWS\AWS\src\debug\assets" />
+        <source path="C:\Users\Tim\AndroidStudioProjects\AWS\AWS\src\debug\assets" />
     </dataSet>
 
 </merger>

@@ -9,11 +9,10 @@ package com.eindopdracht.aws;
 
 public final class R {
     public static final class array {
-        public static final int duration=0x7f040000;
-        public static final int duration_id=0x7f040001;
-        public static final int interval_id=0x7f040002;
-        public static final int interval_range=0x7f040003;
-        public static final int interval_values=0x7f040004;
+        public static final int duration=0x7f040003;
+        public static final int interval_range=0x7f040000;
+        public static final int interval_range_httpStyle=0x7f040001;
+        public static final int interval_values=0x7f040002;
     }
     public static final class attr {
     }

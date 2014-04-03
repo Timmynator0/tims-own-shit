@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/Administrator/AWS/AWS/src/main/res/values-sw600dp/bools.xml -->
+    <!-- From: file:/C:/Users/Tim/AndroidStudioProjects/AWS/AWS/src/main/res/values-sw600dp/bools.xml -->
     <eat-comment />
 
     <bool name="isTablet">true</bool>
