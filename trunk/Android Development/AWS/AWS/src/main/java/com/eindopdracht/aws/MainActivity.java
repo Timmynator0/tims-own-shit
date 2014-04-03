@@ -3,6 +3,8 @@ package com.eindopdracht.aws;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +16,12 @@ import com.eindopdracht.aws.data.DataSources;
 
 
 public class MainActivity extends Activity {
-
-
+public SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sp = getSharedPreferences("AWS", Context.MODE_PRIVATE);
 
         // Add graph fragment on tablets
         Bundle data = new Bundle();
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
      * Set up the {@link android.app.ActionBar}.
      */
     private void setupActionBar() {
+
         getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
