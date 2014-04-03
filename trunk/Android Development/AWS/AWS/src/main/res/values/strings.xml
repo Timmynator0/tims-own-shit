@@ -38,5 +38,6 @@
     <string name="title_activity_interval">Interval</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="current_interval">Current interval = </string>
 
 </resources>

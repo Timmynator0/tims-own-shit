@@ -2,7 +2,6 @@ package com.eindopdracht.aws.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Loader;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
@@ -31,11 +29,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.eindopdracht.aws.data.Constants.*;
-
 import java.io.IOException;
 
-public class GraphViewFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+import static com.eindopdracht.aws.data.Constants.DATAPOINTS;
+import static com.eindopdracht.aws.data.Constants.XIVELY_API_KEY;
+import static com.eindopdracht.aws.data.Constants.XIVELY_DATASTREAM_GRAPH_BASE_URL;
+import static com.eindopdracht.aws.data.Constants.XIVELY_HEADER_API_KEY;
+
+public class GraphViewFragment extends Fragment {//implements AdapterView.OnItemSelectedListener{
 
    // private GraphicalView chart;
     private GraphView chart;
@@ -78,6 +79,8 @@ public class GraphViewFragment extends Fragment implements AdapterView.OnItemSel
         if(arguments != null && mainLayout != null && activity != null) {
             datastreamIndex = arguments.getInt("index", 0);
 
+            new HistoricalDataFetchingTask().execute(datastreamIndex, datastreamIndex);
+
             layout = (LinearLayout) mainLayout.findViewById(R.id.chart);
         }
 
@@ -115,19 +118,19 @@ public class GraphViewFragment extends Fragment implements AdapterView.OnItemSel
         super.onResume();
     }
 
-
-    @Override
-    public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
-        if(lastSelection != position) {
-            new HistoricalDataFetchingTask().execute(datastreamIndex, position);
-            lastSelection = position;
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        //Do nothing
-    }
+//
+//    @Override
+//    public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+//        if(lastSelection != position) {
+//            new HistoricalDataFetchingTask().execute(datastreamIndex, position);
+//            lastSelection = position;
+//        }
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> adapterView) {
+//        //Do nothing
+//    }
 
     public class HistoricalDataFetchingTask extends AsyncTask<Integer, Integer, Void> {
         @Override
