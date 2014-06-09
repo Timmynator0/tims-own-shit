@@ -249,19 +249,13 @@ namespace FMApplicatie
 
         private void verwijderPijl(Pijl oudePijl)
         {
-            //            foreach (Toestand toestand in toestanden)
-            //{
-            //    // Verwijder de oude pijl indien deze bestaat
-            //    toestand.geefUitgaandePijlen().Remove(oudePijl);
-            //    toestand.geefInkomendePijlen().Remove(oudePijl);
-            //}
-            Parallel.ForEach(toestanden, toestand =>
+            foreach (Toestand toestand in toestanden)
             {
                 // Verwijder de oude pijl indien deze bestaat
                 toestand.geefUitgaandePijlen().Remove(oudePijl);
                 toestand.geefInkomendePijlen().Remove(oudePijl);
             }
-            );
+
         }
     }
 }
